@@ -12,6 +12,8 @@ public class LevelSelectionObject : MonoBehaviour {
     void Start () {
         mLevelSelectionController = LevelSelection.Instance;
 	}
+
+   
 	
 	// Update is called once per frame
 	void Update () {
@@ -29,7 +31,7 @@ public class LevelSelectionObject : MonoBehaviour {
     public void SelectLevelObject()
     {
         mLevelSelectionController.DeselectAll();
-        mLevelSelectionController.SelectedLevel = "";
+        mLevelSelectionController.SelectedLevel = LevelScene;
         if (ButtonText != null)
         {
             ButtonText.fontStyle = FontStyle.Bold;

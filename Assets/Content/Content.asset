@@ -14,6 +14,9 @@ MonoBehaviour:
   MaxOrbs: 3
   SpawnTimeOrbs: 5.5
   ProjectileSpeed: 5
+  Player:
+    MoveSpeed: 5
+    JumpForce: 300
   DefaultSound: {fileID: 8300000, guid: f205de380c9e9c54d88f1d04fddb5423, type: 3}
   DeathSounds:
   - {fileID: 8300000, guid: 5a4859657864de2468fdc7c83b72ec94, type: 3}
