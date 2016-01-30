@@ -1,27 +1,49 @@
 ﻿using UnityEngine;
-using System.Collections;
+using System.Collections.Generic;
 
 public class OrbCollector : MonoBehaviour
 {
+    private List<OrbType> CollectedOrbs;
 
-    // Use this for initialization
-    void Start()
+    private void Start()
     {
-
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-
+        CollectedOrbs = new List<OrbType>();
     }
 
     void OnTriggerEnter2D(Collider2D other)
     {
-        if (other.tag == "Fire" || other.tag == "Shield" || other.tag == "Melee")
+        if (other.tag == "Fire")
         {
-            OrbManager.Instance.CollectOrb(other.gameObject);
-            Destroy(other.gameObject);
+            CollectOrb(OrbType.Melee, other.gameObject);
         }
+        else if (other.tag == "Shield")
+        {
+            CollectOrb(OrbType.Melee, other.gameObject);
+        }
+        else if(other.tag == "Melee")
+        {
+            CollectOrb(OrbType.Melee,other.gameObject);
+        }
+    }
+
+    private void CollectOrb(OrbType type, GameObject go)
+    {
+        if(CollectedOrbs.Count < 3)
+        {
+            CollectedOrbs.Add(type);
+        }
+
+        OrbManager.Instance.CollectOrb(go);
+        Destroy(go);
+    }
+
+    public List<OrbType> GetCollectedOrbs()
+    {
+        return CollectedOrbs;
+    }
+
+    public void ClearCollectedOrbs()
+    {
+        CollectedOrbs.Clear();
     }
 }

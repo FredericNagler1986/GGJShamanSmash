@@ -95,6 +95,8 @@ public class OrbManager : SingletonMonoBehaviour<OrbManager>
         orbInstance.transform.position = freeTransForm.position;
         Orbs[freeTransForm].Type = newType;
         Orbs[freeTransForm].Instance = orbInstance;
+
+        SoundManager.Instance.PlaySpawnOrbSound();
     }
 
     public void CollectOrb(GameObject orbInstance)
@@ -107,7 +109,7 @@ public class OrbManager : SingletonMonoBehaviour<OrbManager>
             if(orb.Value.Instance != orbInstance)
                 continue;
 
-            Debug.Log("Orb collected: " + orb.Value.Type.ToString());
+            SoundManager.Instance.PlayCollectOrbSound();
 
             orb.Value.Type = OrbType.None;
             orb.Value.Instance = null;

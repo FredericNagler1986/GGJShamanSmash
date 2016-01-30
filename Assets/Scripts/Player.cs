@@ -16,9 +16,16 @@ public class Player : MonoBehaviour
 	bool lookleft;
 	bool grounded;
 
+    private OrbCollector collector;
+
 	void Awake ()
 	{
 	}
+
+    void Start()
+    {
+        collector = GetComponent<OrbCollector>();
+    }
 
 	/*
 	void Update ()

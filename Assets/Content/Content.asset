@@ -17,3 +17,33 @@ MonoBehaviour:
   Player:
     MoveSpeed: 5
     JumpForce: 300
+  DefaultSound: {fileID: 8300000, guid: f205de380c9e9c54d88f1d04fddb5423, type: 3}
+  DeathSounds:
+  - {fileID: 8300000, guid: 5a4859657864de2468fdc7c83b72ec94, type: 3}
+  - {fileID: 8300000, guid: 75d8185a28aa3964088fb1cdd20d46e0, type: 3}
+  - {fileID: 8300000, guid: 3db87bfd8cd36714f8989319beddd6cd, type: 3}
+  GetHitSounds:
+  - {fileID: 8300000, guid: 2e7c1c4ea3f40594daa26c5accc70b79, type: 3}
+  - {fileID: 8300000, guid: 5832db6656fe3374986db11dab9c27aa, type: 3}
+  - {fileID: 8300000, guid: c2cdc686a0d0b3b4aa5eabced9f639a0, type: 3}
+  SpawnOrbSounds:
+  - {fileID: 8300000, guid: 7b61515d51aba9b4a965141b8bed4e3e, type: 3}
+  - {fileID: 8300000, guid: ce1e0f838f21a7d43b0a443fcca94291, type: 3}
+  - {fileID: 8300000, guid: ebe679ad35a18294ca172655e0e5c506, type: 3}
+  CollectOrbSounds:
+  - {fileID: 8300000, guid: 758df369ad451c348912e38991096336, type: 3}
+  - {fileID: 8300000, guid: a6d8d4e4c2ab9464caaaadb39a854d4a, type: 3}
+  - {fileID: 8300000, guid: e9b6a0e3dacf0e64d97958c1b1c5d26e, type: 3}
+  - {fileID: 8300000, guid: d3d37631ccc0cb549bb1896659fc169c, type: 3}
+  ExecutePunchSounds:
+  - {fileID: 8300000, guid: eed68ddd1159abf40ae1fb1dee53efba, type: 3}
+  PunchSuccessSounds:
+  - {fileID: 8300000, guid: 2bdd67def75e5f641a4569ab2f4cd504, type: 3}
+  SlashSounds:
+  - {fileID: 8300000, guid: b3a98177015529b44a51c7b4361a9a34, type: 3}
+  ShieldSounds:
+  - {fileID: 8300000, guid: 3e144e578c95bd64e9522fcdf2e0f88e, type: 3}
+  FireBallThrowSounds:
+  - {fileID: 8300000, guid: fd644d635b16bed43a84110da329d24d, type: 3}
+  FireBallExplodeSounds:
+  - {fileID: 8300000, guid: 7d9f032ef8d24a44b91e92adfacb634b, type: 3}
