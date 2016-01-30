@@ -1,7 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections.Generic;
 using System;
-using System.Collections;
 
 public enum OrbType
 {
@@ -22,6 +21,8 @@ public class OrbManager : SingletonMonoBehaviour<OrbManager>
     public GameObject FirePrefab;
     public GameObject ShieldPrefab;
     public GameObject MeleePrefab;
+
+    public Transform OrbParent;
     
     // Use this for initialization
     void Start ()
@@ -41,7 +42,10 @@ public class OrbManager : SingletonMonoBehaviour<OrbManager>
 
         if(spawnTimer <= 0)
         {
-            SpawnOrb();
+            if(OrbParent.childCount < Content.MaxOrbs)
+            {
+                SpawnOrb();
+            }
             spawnTimer = Content.SpawnTimeOrbs;
         }
 	}
@@ -76,6 +80,7 @@ public class OrbManager : SingletonMonoBehaviour<OrbManager>
                 orbInstance = Instantiate(ShieldPrefab);
                 break;
         }
+        orbInstance.transform.SetParent(OrbParent);
         orbInstance.transform.position = freeTransForm.position;
         Orbs[freeTransForm] = newType;
     }

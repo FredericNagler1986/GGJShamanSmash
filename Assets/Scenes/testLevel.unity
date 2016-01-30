@@ -171,6 +171,33 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
+--- !u!1 &73658538
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  serializedVersion: 4
+  m_Component:
+  - 4: {fileID: 73658539}
+  m_Layer: 0
+  m_Name: OrbParent
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &73658539
+Transform:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 73658538}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 721511635}
+  m_RootOrder: 3
 --- !u!1 &194575654
 GameObject:
   m_ObjectHideFlags: 0
@@ -374,7 +401,7 @@ GameObject:
   serializedVersion: 4
   m_Component:
   - 4: {fileID: 572143430}
-  - 114: {fileID: 572143431}
+  - 114: {fileID: 572143432}
   m_Layer: 0
   m_Name: SpawnPoints
   m_TagString: Untagged
@@ -400,7 +427,7 @@ Transform:
   - {fileID: 978039202}
   m_Father: {fileID: 721511635}
   m_RootOrder: 2
---- !u!114 &572143431
+--- !u!114 &572143432
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 0}
@@ -412,6 +439,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Content: {fileID: 11400000, guid: 1c06734ae0d876b42a1f2d7d66903e69, type: 2}
+  FirePrefab: {fileID: 178982, guid: 61958cb27076b2742ade72e8efcd3318, type: 2}
+  ShieldPrefab: {fileID: 147534, guid: 3ba09d91d22c5c64ea88e1408e866bcd, type: 2}
+  MeleePrefab: {fileID: 116668, guid: 4c65daf366bec914884f3a1d8f45a209, type: 2}
+  OrbParent: {fileID: 73658539}
 --- !u!1 &720811867
 GameObject:
   m_ObjectHideFlags: 0
@@ -488,6 +519,7 @@ Transform:
   - {fileID: 1193549468}
   - {fileID: 536994197}
   - {fileID: 572143430}
+  - {fileID: 73658539}
   m_Father: {fileID: 0}
   m_RootOrder: 1
 --- !u!1 &731856755
@@ -1041,7 +1073,7 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1589295799}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -1.96, y: 2.82, z: 0}
+  m_LocalPosition: {x: 0.48, y: 2.82, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 572143430}
