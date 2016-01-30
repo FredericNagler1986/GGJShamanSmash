@@ -5,5 +5,6 @@ using System;
 public class Content : ScriptableObject
 {
     public int MaxOrbs;
-    public float SpawnTimeOrbs;    
+    public float SpawnTimeOrbs;
+    public float ProjectileSpeed;  
 }

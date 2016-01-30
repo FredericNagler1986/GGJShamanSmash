@@ -12,5 +12,5 @@ MonoBehaviour:
   m_Name: Content
   m_EditorClassIdentifier: 
   MaxOrbs: 3
-  MaxOrbsOfSameType: 2
   SpawnTimeOrbs: 5.5
+  ProjectileSpeed: 5

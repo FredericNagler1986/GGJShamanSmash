@@ -10,11 +10,22 @@ public enum OrbType
     Melee
 }
 
+class Orb
+{
+    public OrbType Type;
+    public GameObject Instance;
+
+    public Orb()
+    {
+        Type = OrbType.None;
+    }
+}
+
 public class OrbManager : SingletonMonoBehaviour<OrbManager>
 {
     public Content Content;
 
-    private Dictionary<Transform, OrbType> Orbs;
+    private Dictionary<Transform, Orb> Orbs;
 
     private float spawnTimer;
 
@@ -27,10 +38,10 @@ public class OrbManager : SingletonMonoBehaviour<OrbManager>
     // Use this for initialization
     void Start ()
     {
-        Orbs = new Dictionary<Transform, OrbType>();
+        Orbs = new Dictionary<Transform, Orb>();
 	    foreach(Transform child in transform)
         {
-            Orbs.Add(child, OrbType.None);
+            Orbs.Add(child, new Orb());
         }
 
         spawnTimer = 0;
@@ -55,7 +66,7 @@ public class OrbManager : SingletonMonoBehaviour<OrbManager>
         var listOfFreeTransforms = new List<Transform>();
         foreach(var orb in Orbs)
         {
-            if(orb.Value == OrbType.None)
+            if(orb.Value.Type == OrbType.None)
             {
                 listOfFreeTransforms.Add(orb.Key);
             }
@@ -82,6 +93,24 @@ public class OrbManager : SingletonMonoBehaviour<OrbManager>
         }
         orbInstance.transform.SetParent(OrbParent);
         orbInstance.transform.position = freeTransForm.position;
-        Orbs[freeTransForm] = newType;
+        Orbs[freeTransForm].Type = newType;
+        Orbs[freeTransForm].Instance = orbInstance;
+    }
+
+    public void CollectOrb(GameObject orbInstance)
+    {
+        foreach(var orb in Orbs)
+        {
+            if (orb.Value == null)
+                continue;
+            
+            if(orb.Value.Instance != orbInstance)
+                continue;
+
+            Debug.Log("Orb collected: " + orb.Value.Type.ToString());
+
+            orb.Value.Type = OrbType.None;
+            orb.Value.Instance = null;
+        }
     }
 }
