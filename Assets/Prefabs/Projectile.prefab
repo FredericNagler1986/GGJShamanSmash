@@ -13,6 +13,7 @@ GameObject:
   - 50: {fileID: 5093170}
   - 58: {fileID: 5883454}
   - 95: {fileID: 9507724}
+  - 114: {fileID: 11413966}
   m_Layer: 0
   m_Name: Projectile
   m_TagString: Untagged
@@ -80,6 +81,18 @@ Animator:
   m_WarningMessage: 
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
+--- !u!114 &11413966
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 131952}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: edfd1baefe1778b409c1b63a3d8ded18, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Area: {x: 10.46, y: 6.06}
 --- !u!114 &11482684
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -94,6 +107,15 @@ MonoBehaviour:
   Direction: -1
   Content: {fileID: 11400000, guid: 1c06734ae0d876b42a1f2d7d66903e69, type: 2}
   ownerPlayer: {fileID: 0}
+  MyAction:
+    Name: Action
+    Knockback: 0
+    SpeedModifier: 1
+    DamageModifier: 1
+    BaseDamage: 0
+    KnockbackStrength: 0
+    OrbNeeded: 
+    EffectPrefab: {fileID: 0}
 --- !u!212 &21274794
 SpriteRenderer:
   m_ObjectHideFlags: 1
@@ -130,7 +152,15 @@ Prefab:
   serializedVersion: 2
   m_Modification:
     m_TransformParent: {fileID: 0}
-    m_Modifications: []
+    m_Modifications:
+    - target: {fileID: 0}
+      propertyPath: Area.x
+      value: 10.46
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: Area.y
+      value: 6.06
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 0}
   m_RootGameObject: {fileID: 131952}

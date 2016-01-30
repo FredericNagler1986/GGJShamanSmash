@@ -25,7 +25,7 @@ public class Projectile : MonoBehaviour
 	void OnTriggerEnter2D ( Collider2D other )
 	{
 		var otherPlayer = other.GetComponentInParent<Player> ();
-		if ( otherPlayer != null && ownerPlayer != otherPlayer )
+		if ( ownerPlayer != otherPlayer )
 		{
 			StartCoroutine ( Explode ( otherPlayer ) );
 		}
@@ -36,7 +36,8 @@ public class Projectile : MonoBehaviour
 		GetComponent<Animator> ().SetTrigger ( "explode" );
 		yield return new WaitForSeconds ( 0.2f );
 		Destroy ( gameObject );
-		OnDoDamaged ( otherPlayer );
+		if ( otherPlayer != null )
+			OnDoDamaged ( otherPlayer );
 	}
 
 	void OnDoDamaged ( Player otherPlayer )
