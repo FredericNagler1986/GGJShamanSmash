@@ -38,9 +38,14 @@ public class Player : MonoBehaviour
         MaskSpriteRenderer.sprite = Content.GetMaskSprite(maskId);
         BodySpriteRenderer.color = Content.GetPlayerColor(playerId);
         inputPrefix = Content.GetInputPrefix(playerId);
-		actionManager = GetComponent<PlayerActionManager> ();
 
 		HP = Content.Player.StartHP;
+	}
+
+	void Start ()
+	{
+		collector = GetComponent<OrbCollector> ();
+		actionManager = GetComponent<PlayerActionManager> ();
 	}
 
 	void FixedUpdate ()
