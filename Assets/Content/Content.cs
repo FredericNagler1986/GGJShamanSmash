@@ -21,7 +21,9 @@ public class Content : ScriptableObject
         public float MoveSpeed = 100;
         public float JumpForce = 100;
 		public int StartHP = 100;
-    }
+		public float PunchLength = 0.632f;
+		public float PunchCooldown = 1.2f;
+	}
 
     public AudioClip DefaultSound;
     public List<AudioClip> DeathSounds;

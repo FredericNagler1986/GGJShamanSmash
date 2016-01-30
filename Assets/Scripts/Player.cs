@@ -11,8 +11,8 @@ public class Player : MonoBehaviour
 
 	public LayerMask GroundLayer;
 
-    public SpriteRenderer BodySpriteRenderer;
-    public SpriteRenderer MaskSpriteRenderer;
+	public SpriteRenderer BodySpriteRenderer;
+	public SpriteRenderer MaskSpriteRenderer;
 
 	public bool Knockbackable = true;
 	public int HP;
@@ -20,10 +20,12 @@ public class Player : MonoBehaviour
 	bool lookleft;
 	bool grounded;
 
-    private int id;
-    private string inputPrefix;
+	private int id;
+	private string inputPrefix;
 
-    private OrbCollector collector;
+	private float moveInputBlockTime;
+	private float punchBlockTime;
+	private OrbCollector collector;
 	private PlayerActionManager actionManager;
 
 	public bool Lookleft
@@ -31,13 +33,13 @@ public class Player : MonoBehaviour
 		get { return lookleft; }
 	}
 
-    public void Init(int playerId, int maskId)
-    {
-        id = playerId;
+	public void Init ( int playerId, int maskId )
+	{
+		id = playerId;
 
-        MaskSpriteRenderer.sprite = Content.GetMaskSprite(maskId);
-        BodySpriteRenderer.color = Content.GetPlayerColor(playerId);
-        inputPrefix = Content.GetInputPrefix(playerId);
+		MaskSpriteRenderer.sprite = Content.GetMaskSprite ( maskId );
+		BodySpriteRenderer.color = Content.GetPlayerColor ( playerId );
+		inputPrefix = Content.GetInputPrefix ( playerId );
 
 		HP = Content.Player.StartHP;
 	}
@@ -54,10 +56,13 @@ public class Player : MonoBehaviour
 		var y = Input.GetAxis ( inputPrefix + "Vertical" );
 
 		var velo = myRigid.velocity;
-		if ( x != 0 )
+		velo = Vector2.ClampMagnitude ( velo, 10 );
+
+		bool blockMoveInput = Time.time > moveInputBlockTime;
+
+		if ( x != 0 && blockMoveInput )
 		{
-		velo.x = x * Content.Player.MoveSpeed;
-		myRigid.velocity = velo;
+			velo.x = x * Content.Player.MoveSpeed;
 		}
 
 		var isGround = Mathf.Abs ( velo.y ) < 0.1f;
@@ -82,12 +87,15 @@ public class Player : MonoBehaviour
 
 		bool isGrounded = myRigid.IsTouchingLayers ( GroundLayer.value );
 		var jump = Input.GetButtonDown ( inputPrefix + "A" );
-		if ( (jump || y > 0.6f) && isGrounded )
+		if ( (jump || y > 0.6f) && isGrounded && blockMoveInput )
 		{
 			myRigid.AddForce ( new Vector2 ( 0, Content.Player.JumpForce ) );
 			myAnimator.SetTrigger ( "Jump" );
 			myAnimator.ResetTrigger ( "Falling" );
 		}
+
+
+		myRigid.velocity = velo;
 	}
 
 	void Update ()
@@ -95,12 +103,22 @@ public class Player : MonoBehaviour
 		if ( Input.GetButtonDown ( inputPrefix + "B" ) )
 		{
 			bool isCast = actionManager.PlayAction ( this, collector.GetCollectedOrbs () );
-			Debug.Log ("cast action " + isCast);
+			Debug.Log ( "cast action " + isCast );
 			if ( !isCast )
 			{
 
 			}
 		}
+
+		if ( Time.time > punchBlockTime && Input.GetButtonDown ( inputPrefix + "X" ) )
+		{
+			moveInputBlockTime = Time.time + Content.Player.PunchLength;
+			punchBlockTime = Time.time + Content.Player.PunchCooldown;
+			myRigid.velocity *= 0.5f;
+			myAnimator.SetTrigger ( "Punch" );
+		}
+
+		myAnimator.SetBool ( "IsBlock", Time.time < moveInputBlockTime );
 	}
 
 	/*
