@@ -8,14 +8,19 @@ public class Content : ScriptableObject
     public int MaxOrbs;
     public float SpawnTimeOrbs;
     public float ProjectileSpeed;
+	public float ProjectileLifetime;
 
     public PlayerValues Player;
+
+	public PlayerAction[] Actions;
+
 
     [Serializable]
     public class PlayerValues
     {
         public float MoveSpeed = 100;
         public float JumpForce = 100;
+		public int StartHP = 100;
     }
 
     public AudioClip DefaultSound;
@@ -111,4 +116,23 @@ public class Content : ScriptableObject
     {
         return InputPrefixes[id];
     }
+}
+
+
+[Serializable]
+public class PlayerAction
+{
+	public string Name = "Action";
+	// player mod values
+	public bool Knockback = false;
+	public float SpeedModifier = 1f;
+	public float DamageModifier = 1f;
+
+	// 
+	public int BaseDamage = 0;
+	public int KnockbackStrength = 0;
+
+	public OrbType[] OrbNeeded;
+
+	public GameObject EffectPrefab;
 }

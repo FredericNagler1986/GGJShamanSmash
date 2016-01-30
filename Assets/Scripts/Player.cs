@@ -14,6 +14,9 @@ public class Player : MonoBehaviour
     public SpriteRenderer BodySpriteRenderer;
     public SpriteRenderer MaskSpriteRenderer;
 
+	public bool Knockbackable = true;
+	public int HP;
+
 	bool lookleft;
 	bool grounded;
 
@@ -21,11 +24,12 @@ public class Player : MonoBehaviour
     private string inputPrefix;
 
     private OrbCollector collector;
+	private PlayerActionManager actionManager;
 
-    void Start()
-    {
-        collector = GetComponent<OrbCollector>();
-    }
+	public bool Lookleft
+	{
+		get { return lookleft; }
+	}
 
     public void Init(int playerId, int maskId)
     {
@@ -34,29 +38,15 @@ public class Player : MonoBehaviour
         MaskSpriteRenderer.sprite = Content.GetMaskSprite(maskId);
         BodySpriteRenderer.color = Content.GetPlayerColor(playerId);
         inputPrefix = Content.GetInputPrefix(playerId);
-    }
 
-	/*
-	void Update ()
-	{
-		//var x = Input.GetAxis ( inputPrefix + "Horizontal" );
-		//var y = Input.GetAxis ( inputPrefix + "Vertical" );
-
-		//if ( x != 0 )
-		//{
-		//	lookleft = x < 0;
-		//}
-		//myBody.flipX = lookleft;
-
-		//transform.position += new Vector3 ( x, y, 0 );
-
-		//var btnX = Input.GetButton ( inputPrefix + "X" );
-		//var btnY = Input.GetButton ( inputPrefix + "Y" );
-		//var btnA = Input.GetButton ( inputPrefix + "A" );
-		//var btnB = Input.GetButton ( inputPrefix + "B" );
-		//Debug.Log ( "X: " + btnX + "; Y: " + btnY + "; A: " + btnA + "; B: " + btnB );
+		HP = Content.Player.StartHP;
 	}
-	*/
+
+	void Start ()
+	{
+		collector = GetComponent<OrbCollector> ();
+		actionManager = GetComponent<PlayerActionManager> ();
+	}
 
 	void FixedUpdate ()
 	{
@@ -64,9 +54,11 @@ public class Player : MonoBehaviour
 		var y = Input.GetAxis ( inputPrefix + "Vertical" );
 
 		var velo = myRigid.velocity;
+		if ( x != 0 )
+		{
 		velo.x = x * Content.Player.MoveSpeed;
 		myRigid.velocity = velo;
-
+		}
 
 		var isGround = Mathf.Abs ( velo.y ) < 0.1f;
 		if ( grounded != isGround )
@@ -87,7 +79,6 @@ public class Player : MonoBehaviour
 		var speedMod = Mathf.Abs ( velo.x ) / Content.Player.MoveSpeed;
 		myAnimator.SetFloat ( "Speed", speedMod );
 		myAnimator.SetBool ( "IsGround", isGround );
-		//myAnimator.SetBool ( "IsRun", x != 0 );
 
 		bool isGrounded = myRigid.IsTouchingLayers ( GroundLayer.value );
 		var jump = Input.GetButtonDown ( inputPrefix + "A" );
@@ -96,14 +87,26 @@ public class Player : MonoBehaviour
 			myRigid.AddForce ( new Vector2 ( 0, Content.Player.JumpForce ) );
 			myAnimator.SetTrigger ( "Jump" );
 			myAnimator.ResetTrigger ( "Falling" );
-			Debug.Log ( inputPrefix + " jump" );
 		}
 	}
 
+	void Update ()
+	{
+		if ( Input.GetButtonDown ( inputPrefix + "B" ) )
+		{
+			bool isCast = actionManager.PlayAction ( this, collector.GetCollectedOrbs () );
+			Debug.Log ("cast action " + isCast);
+			if ( !isCast )
+			{
 
+			}
+		}
+	}
 
+	/*
 	void OnGUI ()
 	{
 		GUILayout.Label ( myRigid.velocity.ToString ( "" ) );
 	}
+	*/
 }
