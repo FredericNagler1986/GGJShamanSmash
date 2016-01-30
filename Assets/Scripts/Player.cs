@@ -1,4 +1,5 @@
 ﻿using UnityEngine;
+using UnityEngine.UI;
 using System.Collections;
 
 public class Player : MonoBehaviour
@@ -28,12 +29,14 @@ public class Player : MonoBehaviour
 	private OrbCollector collector;
 	private PlayerActionManager actionManager;
 
+    private Image healthImage;
+
 	public bool Lookleft
 	{
 		get { return lookleft; }
 	}
 
-	public void Init ( int playerId, int maskId )
+	public void Init ( int playerId, int maskId, Image healthImage)
 	{
 		id = playerId;
 
@@ -42,6 +45,8 @@ public class Player : MonoBehaviour
 		inputPrefix = Content.GetInputPrefix ( playerId );
 
 		HP = Content.Player.StartHP;
+
+        this.healthImage = healthImage;
 	}
 
 	void Start ()
@@ -78,10 +83,15 @@ public class Player : MonoBehaviour
 		if ( velo.x != 0 )
 		{
 			lookleft = velo.x < 0;
-		}
-		myBody.flipX = lookleft;
+        }
+        myBody.flipX = lookleft;
 
-		var speedMod = Mathf.Abs ( velo.x ) / Content.Player.MoveSpeed;
+        MaskSpriteRenderer.flipX = lookleft;
+        var temp = MaskSpriteRenderer.transform.localPosition;
+        temp.x = lookleft ? -0.12f : 0.12f;
+        MaskSpriteRenderer.transform.localPosition = temp;
+
+        var speedMod = Mathf.Abs ( velo.x ) / Content.Player.MoveSpeed;
 		myAnimator.SetFloat ( "Speed", speedMod );
 		myAnimator.SetBool ( "IsGround", isGround );
 
@@ -93,9 +103,11 @@ public class Player : MonoBehaviour
 			myAnimator.SetTrigger ( "Jump" );
 			myAnimator.ResetTrigger ( "Falling" );
 		}
-
+        
 
 		myRigid.velocity = velo;
+
+        this.healthImage.fillAmount = (float)HP / (float)Content.Player.StartHP;
 	}
 
 	void Update ()
