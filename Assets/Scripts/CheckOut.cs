@@ -11,7 +11,7 @@ public class CheckOut : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
-        radius = GetComponent<CircleCollider2D>().radius;
+        radius = GetComponentInChildren<CircleCollider2D>().radius;
         rigid = GetComponent<Rigidbody2D>();
 	}
 
