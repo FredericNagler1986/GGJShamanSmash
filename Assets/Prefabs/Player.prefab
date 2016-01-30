@@ -222,7 +222,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 32ef7da07b5d7194d9fadda50107cce7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Content: {fileID: 0}
+  Content: {fileID: 11400000, guid: 1c06734ae0d876b42a1f2d7d66903e69, type: 2}
   punchLayer:
     serializedVersion: 2
     m_Bits: 512
