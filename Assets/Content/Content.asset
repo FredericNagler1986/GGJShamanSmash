@@ -86,6 +86,6 @@ MonoBehaviour:
   - 'P2 '
   - 'P3 '
   - 'P4 '
-  FireOrbSprite: {fileID: 21300000, guid: a5fb4429c4f36664291374c00e4e31b6, type: 3}
-  ShieldOrbSprite: {fileID: 21300000, guid: 8254eb309dd8fdb4b897e2a12b43d677, type: 3}
-  MeleeOrbSprite: {fileID: 21300000, guid: e9e3a9bc66976de49984192c1f83f874, type: 3}
+  FireOrbSprite: {fileID: 21300000, guid: 8254eb309dd8fdb4b897e2a12b43d677, type: 3}
+  ShieldOrbSprite: {fileID: 21300000, guid: e9e3a9bc66976de49984192c1f83f874, type: 3}
+  MeleeOrbSprite: {fileID: 21300000, guid: a5fb4429c4f36664291374c00e4e31b6, type: 3}

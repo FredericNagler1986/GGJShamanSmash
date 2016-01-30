@@ -25,7 +25,7 @@ public class Player : MonoBehaviour
 	bool lookleft;
 	bool grounded;
 
-	private int id;
+	//private int id;
 	private string inputPrefix;
 
 	private float moveInputBlockTime;
@@ -42,7 +42,7 @@ public class Player : MonoBehaviour
     
 	public void Init ( int playerId, int maskId, Image healthImage, Image slot1, Image slot2, Image slot3)
 	{
-		id = playerId;
+		//id = playerId;
 
 		MaskSpriteRenderer.sprite = Content.GetMaskSprite ( maskId );
 		BodySpriteRenderer.color = Content.GetPlayerColor ( playerId );

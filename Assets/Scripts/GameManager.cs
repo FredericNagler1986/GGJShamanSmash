@@ -41,6 +41,11 @@ public class GameManager : SingletonMonoBehaviour<GameManager>
         }
     }
 
+    public void ScreenShake(float force)
+    {
+        iTween.ShakePosition(Camera.main.gameObject, iTween.Hash("x", force, "y", force, "time", 1.0f));
+    }
+
     private void AddPlayer(int playerId, int maskId)
     {
         PlayerStats[playerId].SetActive(true);

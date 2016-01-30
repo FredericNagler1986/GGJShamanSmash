@@ -111,6 +111,7 @@ public class OrbManager : SingletonMonoBehaviour<OrbManager>
                 continue;
 
             SoundManager.Instance.PlayCollectOrbSound();
+            GameManager.Instance.ScreenShake(0.3f);
 
             orb.Value.Type = OrbType.None;
             orb.Value.Instance = null;
