@@ -22,6 +22,7 @@ public class PlayerSelectionObject : MonoBehaviour
         }
     }
     public int playerID = 0;
+    public int MaskID = 1;
 
 
     // Use this for initialization

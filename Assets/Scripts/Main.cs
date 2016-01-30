@@ -6,6 +6,8 @@ public class Main : SingletonMonoBehaviour<Main>
 {
     public EGameState GameState = EGameState.None;
     public GameObject ResultScreen = null;
+    [SerializeField]
+    public GameData GameData = null;
 
     void Awake()
     {
