@@ -107,7 +107,7 @@ public class OrbManager : SingletonMonoBehaviour<OrbManager>
             if(orb.Value.Instance != orbInstance)
                 continue;
 
-            Debug.Log("Orb collected: " + orb.Value.Type.ToString());
+            SoundManager.Instance.PlayCollectOrbSound();
 
             orb.Value.Type = OrbType.None;
             orb.Value.Instance = null;
