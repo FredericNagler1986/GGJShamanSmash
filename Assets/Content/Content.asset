@@ -19,6 +19,18 @@ MonoBehaviour:
     MoveSpeed: 5
     JumpForce: 300
     StartHP: 100
+    PunchLength: 0.632
+    PunchCooldown: 1.2
+    PunchKnockback: 1.2
+  ActionPunch:
+    Name: Action
+    Knockback: 0
+    SpeedModifier: 1
+    DamageModifier: 1
+    BaseDamage: 0
+    KnockbackStrength: 100
+    OrbNeeded: 
+    EffectPrefab: {fileID: 185936, guid: 00f8abd2344a05841b3d5aea499377c8, type: 2}
   Actions:
   - Name: Fireball
     Knockback: 0
