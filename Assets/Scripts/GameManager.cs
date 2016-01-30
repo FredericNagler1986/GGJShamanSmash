@@ -10,8 +10,19 @@ public class GameManager : SingletonMonoBehaviour<GameManager>
     public void Start()
     {
         Players = new List<GameObject>();
-        AddPlayer(0, 0);
-        AddPlayer(1, 1);
+
+        if (Main.Instance == null)
+        {
+            AddPlayer(0, 0);
+            AddPlayer(1, 1);
+        }
+        else
+        {
+            foreach (var player in Main.Instance.GameData.PlayerData)
+            {
+                AddPlayer(player.PlayerID, player.MaskID);
+            }
+        }
     }
 
     private void AddPlayer(int playerId, int maskId)
