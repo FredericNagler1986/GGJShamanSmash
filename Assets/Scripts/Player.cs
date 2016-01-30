@@ -12,6 +12,8 @@ public class Player : MonoBehaviour
 
 	public LayerMask GroundLayer;
 
+	public BoxCollider2D PunchHotzone;
+
 	public SpriteRenderer BodySpriteRenderer;
 	public SpriteRenderer MaskSpriteRenderer;
 
@@ -31,13 +33,13 @@ public class Player : MonoBehaviour
 	private OrbCollector collector;
 	private PlayerActionManager actionManager;
 
-    private Image healthImage;
+	private Image healthImage;
 
 	public bool Lookleft
 	{
 		get { return lookleft; }
 	}
-
+    
 	public void Init ( int playerId, int maskId, Image healthImage, Image slot1, Image slot2, Image slot3)
 	{
 		id = playerId;
@@ -47,9 +49,9 @@ public class Player : MonoBehaviour
 		inputPrefix = Content.GetInputPrefix ( playerId );
 
 		HP = Content.Player.StartHP;
-
-        this.healthImage = healthImage;
-
+        
+		this.healthImage = healthImage;
+	
         Slots = new List<Image>();
         Slots.Add(slot1);
         Slots.Add(slot2);
@@ -87,18 +89,14 @@ public class Player : MonoBehaviour
 			myAnimator.SetTrigger ( "Falling" );
 		}
 
-		if ( velo.x != 0 )
+		if ( !Mathf.Approximately ( velo.x, 0 ) )
 		{
-			lookleft = velo.x < 0;
-        }
-        myBody.flipX = lookleft;
+			lookleft = velo.x < -0.01f;
+		}
+		
+		transform.localScale = new Vector3 ( lookleft ? -1 : 1, 1, 1 );
 
-        MaskSpriteRenderer.flipX = lookleft;
-        var temp = MaskSpriteRenderer.transform.localPosition;
-        temp.x = lookleft ? -0.12f : 0.12f;
-        MaskSpriteRenderer.transform.localPosition = temp;
-
-        var speedMod = Mathf.Abs ( velo.x ) / Content.Player.MoveSpeed;
+		var speedMod = Mathf.Abs ( velo.x ) / Content.Player.MoveSpeed;
 		myAnimator.SetFloat ( "Speed", speedMod );
 		myAnimator.SetBool ( "IsGround", isGround );
 
@@ -110,7 +108,7 @@ public class Player : MonoBehaviour
 			myAnimator.SetTrigger ( "Jump" );
 			myAnimator.ResetTrigger ( "Falling" );
 		}
-        
+
 
 		myRigid.velocity = velo;
 
@@ -175,10 +173,16 @@ public class Player : MonoBehaviour
 		myAnimator.SetBool ( "IsBlock", Time.time < moveInputBlockTime );
 	}
 
-	/*
-	void OnGUI ()
+	void OnPunch ()
 	{
-		GUILayout.Label ( myRigid.velocity.ToString ( "" ) );
+		var point0 = (Vector2)PunchHotzone.transform.position + PunchHotzone.offset - PunchHotzone.size * 0.5f;
+		var point1 = (Vector2)PunchHotzone.transform.position + PunchHotzone.offset + PunchHotzone.size * 0.5f;
+
+		bool isCast = actionManager.PlayPunch ( this, point0, point1 );
+		Debug.Log ( "cast punch " + isCast );
+		if ( !isCast )
+		{
+
+		}
 	}
-	*/
 }

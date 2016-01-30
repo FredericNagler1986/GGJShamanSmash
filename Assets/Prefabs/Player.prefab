@@ -24,10 +24,25 @@ GameObject:
   serializedVersion: 4
   m_Component:
   - 4: {fileID: 471722}
-  - 61: {fileID: 6131574}
   - 58: {fileID: 5889418}
   m_Layer: 9
   m_Name: colliders
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!1 &135336
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  serializedVersion: 4
+  m_Component:
+  - 4: {fileID: 429414}
+  - 61: {fileID: 6106298}
+  m_Layer: 9
+  m_Name: punch hitbox
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -70,6 +85,18 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
+--- !u!4 &429414
+Transform:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 135336}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0.305, y: 0.032, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 461782}
+  m_RootOrder: 3
 --- !u!4 &461782
 Transform:
   m_ObjectHideFlags: 1
@@ -83,6 +110,7 @@ Transform:
   - {fileID: 471722}
   - {fileID: 494198}
   - {fileID: 465644}
+  - {fileID: 429414}
   m_Father: {fileID: 0}
   m_RootOrder: 0
 --- !u!4 &465644
@@ -92,8 +120,8 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 114622}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0.31, z: 0}
-  m_LocalScale: {x: 0.4, y: 0.4, z: 1}
+  m_LocalPosition: {x: 0.106, y: 0.391, z: 0}
+  m_LocalScale: {x: 0.35, y: 0.35, z: 1}
   m_Children: []
   m_Father: {fileID: 461782}
   m_RootOrder: 2
@@ -152,20 +180,20 @@ CircleCollider2D:
   m_Offset: {x: 0, y: 0}
   serializedVersion: 2
   m_Radius: 0.5
---- !u!61 &6131574
+--- !u!61 &6106298
 BoxCollider2D:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 117342}
+  m_GameObject: {fileID: 135336}
   m_Enabled: 0
   m_Density: 1
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_UsedByEffector: 0
   m_Offset: {x: 0, y: 0}
   serializedVersion: 2
-  m_Size: {x: 1, y: 1}
+  m_Size: {x: 0.5, y: 0.4}
 --- !u!95 &9504442
 Animator:
   serializedVersion: 3
@@ -194,7 +222,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 32ef7da07b5d7194d9fadda50107cce7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Content: {fileID: 11400000, guid: 1c06734ae0d876b42a1f2d7d66903e69, type: 2}
+  Content: {fileID: 0}
+  punchLayer:
+    serializedVersion: 2
+    m_Bits: 512
 --- !u!114 &11448120
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -236,8 +267,10 @@ MonoBehaviour:
   GroundLayer:
     serializedVersion: 2
     m_Bits: 256
+  PunchHotzone: {fileID: 6106298}
   BodySpriteRenderer: {fileID: 21270334}
   MaskSpriteRenderer: {fileID: 21269144}
+  Slots: []
   Knockbackable: 1
   HP: 0
 --- !u!212 &21269144
@@ -311,6 +344,11 @@ Prefab:
       propertyPath: m_LocalPosition.x
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: Content
+      value: 
+      objectReference: {fileID: 11400000, guid: 1c06734ae0d876b42a1f2d7d66903e69,
+        type: 2}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 0}
   m_RootGameObject: {fileID: 175078}
