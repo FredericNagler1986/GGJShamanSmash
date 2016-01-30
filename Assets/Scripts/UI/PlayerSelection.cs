@@ -30,6 +30,20 @@ public class PlayerSelection : SingletonMonoBehaviour<PlayerSelection>
         }
     }
 
+    void OnDisable()
+    {
+        GameData data = new GameData();
+        for (int i = 0; i < mPlayerSelectionObjects.Count; i++)
+        {
+            if (mPlayerSelectionObjects[i].Status == EPlayerSelectionStatus.Ready)
+            {
+                data.AddPlayerPlayerData(mPlayerSelectionObjects[i].playerID, mPlayerSelectionObjects[i].MaskID);
+            }
+        }
+        Main.Instance.GameData = data;
+        
+    }
+
     public void UpdateButton()
     {
         bool active = true;
