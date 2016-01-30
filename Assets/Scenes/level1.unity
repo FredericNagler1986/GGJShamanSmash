@@ -787,6 +787,54 @@ Prefab:
       propertyPath: m_RootOrder
       value: 4
       objectReference: {fileID: 0}
+    - target: {fileID: 11422334, guid: bb9aea43e08fcc1498aa7e8f18c1fe97, type: 2}
+      propertyPath: m_Color.a
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 11444846, guid: bb9aea43e08fcc1498aa7e8f18c1fe97, type: 2}
+      propertyPath: m_Color.a
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 11482692, guid: bb9aea43e08fcc1498aa7e8f18c1fe97, type: 2}
+      propertyPath: m_Color.a
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 11437044, guid: bb9aea43e08fcc1498aa7e8f18c1fe97, type: 2}
+      propertyPath: m_Color.a
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 11417794, guid: bb9aea43e08fcc1498aa7e8f18c1fe97, type: 2}
+      propertyPath: m_Color.a
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 11435164, guid: bb9aea43e08fcc1498aa7e8f18c1fe97, type: 2}
+      propertyPath: m_Color.a
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 11427702, guid: bb9aea43e08fcc1498aa7e8f18c1fe97, type: 2}
+      propertyPath: m_Color.a
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 11402482, guid: bb9aea43e08fcc1498aa7e8f18c1fe97, type: 2}
+      propertyPath: m_Color.a
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 11439992, guid: bb9aea43e08fcc1498aa7e8f18c1fe97, type: 2}
+      propertyPath: m_Color.a
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 11405330, guid: bb9aea43e08fcc1498aa7e8f18c1fe97, type: 2}
+      propertyPath: m_Color.a
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 11452156, guid: bb9aea43e08fcc1498aa7e8f18c1fe97, type: 2}
+      propertyPath: m_Color.a
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 11446294, guid: bb9aea43e08fcc1498aa7e8f18c1fe97, type: 2}
+      propertyPath: m_Color.a
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: bb9aea43e08fcc1498aa7e8f18c1fe97, type: 2}
   m_IsPrefabParent: 0

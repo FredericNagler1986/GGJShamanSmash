@@ -1075,6 +1075,21 @@ MonoBehaviour:
   - {fileID: 11496970}
   - {fileID: 11452990}
   - {fileID: 11420206}
+  Slots1:
+  - {fileID: 11482692}
+  - {fileID: 11417794}
+  - {fileID: 11439992}
+  - {fileID: 11405330}
+  Slots2:
+  - {fileID: 11444846}
+  - {fileID: 11435164}
+  - {fileID: 11402482}
+  - {fileID: 11452156}
+  Slots3:
+  - {fileID: 11422334}
+  - {fileID: 11437044}
+  - {fileID: 11427702}
+  - {fileID: 11446294}
   Content: {fileID: 11400000, guid: 1c06734ae0d876b42a1f2d7d66903e69, type: 2}
 --- !u!114 &11462598
 MonoBehaviour:
