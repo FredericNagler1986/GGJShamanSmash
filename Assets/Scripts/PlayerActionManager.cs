@@ -1,7 +1,8 @@
-﻿using UnityEngine;
+﻿using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+using UnityEngine;
 
 public class PlayerActionManager : MonoBehaviour
 {
@@ -9,16 +10,16 @@ public class PlayerActionManager : MonoBehaviour
 
 	public LayerMask punchLayer;
 
-	public bool PlayAction(Player owner, List<OrbType> orbList)
+	public bool PlayAction ( Player owner, List<OrbType> orbList )
 	{
 		if ( orbList.Count == 0 )
 		{
 			return false;
 		}
-		
+
 		foreach ( PlayerAction action in Content.Actions )
 		{
-			bool isOk = true;//action.OrbNeeded.SequenceEqual ( orbList );
+			bool isOk = action.OrbNeeded.SequenceEqual ( orbList );
 			if ( isOk )
 			{
 				return ExecuteAction ( owner, action, null );
@@ -26,7 +27,7 @@ public class PlayerActionManager : MonoBehaviour
 		}
 		return false;
 	}
-	
+
 	public bool PlayPunch ( Player owner, Vector2 point0, Vector2 point1 )
 	{
 		bool flag = false;
@@ -42,14 +43,29 @@ public class PlayerActionManager : MonoBehaviour
 		return flag;
 	}
 
-	private bool ExecuteAction( Player owner, PlayerAction action, Player target )
+	public bool PlaySlash ( Player owner, Vector2 point0, Vector2 point1 )
+	{
+		bool flag = false;
+		var targets = Physics2D.OverlapAreaAll ( point0, point1, punchLayer.value );
+		foreach ( var target in targets )
+		{
+			var player = target.GetComponentInParent<Player> ();
+			if ( player != null && player != owner )
+			{
+				flag |= ExecuteAction ( owner, Content.ActionSlash, player );
+			}
+		}
+		return flag;
+	}
+
+	private bool ExecuteAction ( Player owner, PlayerAction action, Player target )
 	{
 		if ( action.EffectPrefab == null )
 		{
 			return false;
 		}
 
-		var instance = Object.Instantiate ( action.EffectPrefab );
+		var instance = UnityEngine.Object.Instantiate ( action.EffectPrefab );
 
 		instance.BroadcastMessage ( "OnExecuteAction", new object[] { owner, action, target } );
 

@@ -7,6 +7,7 @@ public class Projectile : MonoBehaviour
 	public Content Content;
 	public Player ownerPlayer;
 	public PlayerAction MyAction;
+	public float speedModifier = 1f;
 
 	void Awake ()
 	{
@@ -18,7 +19,7 @@ public class Projectile : MonoBehaviour
 		GetComponent<SpriteRenderer> ().flipX = Direction < 0;
 
 		float normalizedDirection = Direction >= 0 ? 1 : -1;
-		GetComponent<Rigidbody2D> ().velocity = new Vector2 ( normalizedDirection * Content.ProjectileSpeed, 0 );
+		GetComponent<Rigidbody2D> ().velocity = new Vector2 ( normalizedDirection * Content.ProjectileSpeed * speedModifier, 0 );
 	}
 
 	void OnTriggerEnter2D ( Collider2D other )
