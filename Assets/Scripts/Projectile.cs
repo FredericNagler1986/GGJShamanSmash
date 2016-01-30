@@ -12,8 +12,7 @@ public class Projectile : MonoBehaviour
 	{
 		Destroy ( gameObject, Content.ProjectileLifetime );
 	}
-
-	// Use this for initialization
+	
 	void Start ()
 	{
 		GetComponent<SpriteRenderer> ().flipX = Direction < 0;

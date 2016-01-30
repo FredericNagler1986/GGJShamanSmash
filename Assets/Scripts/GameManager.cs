@@ -10,6 +10,10 @@ public class GameManager : SingletonMonoBehaviour<GameManager>
     public List<Image> MaskSlots;
     public List<Image> HealthSlots;
 
+    public List<Image> Slots1;
+    public List<Image> Slots2;
+    public List<Image> Slots3;
+
     public Content Content;
 
     private List<GameObject> Players;
@@ -43,7 +47,7 @@ public class GameManager : SingletonMonoBehaviour<GameManager>
         MaskSlots[playerId].sprite = Content.GetMaskSprite(maskId);
 
         var player = (GameObject)Instantiate(PlayerPrefab, GetSpawnPoint(),Quaternion.identity);
-        player.GetComponent<Player>().Init(playerId, maskId, HealthSlots[playerId]);
+        player.GetComponent<Player>().Init(playerId, maskId, HealthSlots[playerId],Slots1[playerId], Slots2[playerId], Slots3[playerId]);
         Players.Add(player);
     }
 

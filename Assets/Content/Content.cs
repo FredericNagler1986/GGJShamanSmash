@@ -12,6 +12,7 @@ public class Content : ScriptableObject
 
     public PlayerValues Player;
 
+	public PlayerAction ActionPunch;
 	public PlayerAction[] Actions;
 
 
@@ -23,6 +24,7 @@ public class Content : ScriptableObject
 		public int StartHP = 100;
 		public float PunchLength = 0.632f;
 		public float PunchCooldown = 1.2f;
+		public float PunchKnockback = 1.2f;
 	}
 
     public AudioClip DefaultSound;
@@ -45,6 +47,10 @@ public class Content : ScriptableObject
     public List<Color> PlayerColors;
     public List<Sprite> Masks;
     public List<string> InputPrefixes;
+
+    public Sprite FireOrbSprite;
+    public Sprite ShieldOrbSprite;
+    public Sprite MeleeOrbSprite;
 
     private AudioClip GetRandomSound(List<AudioClip> sounds)
     {
