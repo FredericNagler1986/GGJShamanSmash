@@ -230,7 +230,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Content: {fileID: 11400000, guid: 1c06734ae0d876b42a1f2d7d66903e69, type: 2}
-  inputPrefix: 'P1 '
   myAnimator: {fileID: 9504442}
   myRigid: {fileID: 5062776}
   myBody: {fileID: 21270334}
@@ -239,6 +238,8 @@ MonoBehaviour:
     m_Bits: 256
   BodySpriteRenderer: {fileID: 21270334}
   MaskSpriteRenderer: {fileID: 21269144}
+  Knockbackable: 1
+  HP: 0
 --- !u!212 &21269144
 SpriteRenderer:
   m_ObjectHideFlags: 1

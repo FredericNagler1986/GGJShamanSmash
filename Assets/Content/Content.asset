@@ -14,7 +14,7 @@ MonoBehaviour:
   MaxOrbs: 3
   SpawnTimeOrbs: 5.5
   ProjectileSpeed: 10
-  ProjectileLifetime: 2
+  ProjectileLifetime: 1
   Player:
     MoveSpeed: 5
     JumpForce: 300
