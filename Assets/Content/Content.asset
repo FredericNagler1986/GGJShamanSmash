@@ -47,3 +47,18 @@ MonoBehaviour:
   - {fileID: 8300000, guid: fd644d635b16bed43a84110da329d24d, type: 3}
   FireBallExplodeSounds:
   - {fileID: 8300000, guid: 7d9f032ef8d24a44b91e92adfacb634b, type: 3}
+  PlayerColors:
+  - {r: 0.8528905, g: 1, b: 0.6613322, a: 1}
+  - {r: 0.30882353, g: 0.9713995, b: 1, a: 1}
+  - {r: 1, g: 0.8878296, b: 0.41911763, a: 1}
+  - {r: 0.964503, g: 0.63235295, b: 1, a: 1}
+  Masks:
+  - {fileID: 10911, guid: 0000000000000000f000000000000000, type: 0}
+  - {fileID: 10913, guid: 0000000000000000f000000000000000, type: 0}
+  - {fileID: 10901, guid: 0000000000000000f000000000000000, type: 0}
+  - {fileID: 10905, guid: 0000000000000000f000000000000000, type: 0}
+  InputPrefixes:
+  - 'P1 '
+  - 'P2 '
+  - 'P3 '
+  - 'P4 '

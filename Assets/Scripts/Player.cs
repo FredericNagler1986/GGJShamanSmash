@@ -5,26 +5,35 @@ public class Player : MonoBehaviour
 {
 	public Content Content;
 
-	public string inputPrefix;
-
 	public Animator myAnimator;
 	public Rigidbody2D myRigid;
 	public SpriteRenderer myBody;
 
 	public LayerMask GroundLayer;
 
+    public SpriteRenderer BodySpriteRenderer;
+    public SpriteRenderer MaskSpriteRenderer;
+
 	bool lookleft;
 	bool grounded;
 
-    private OrbCollector collector;
+    private int id;
+    private string inputPrefix;
 
-	void Awake ()
-	{
-	}
+    private OrbCollector collector;
 
     void Start()
     {
         collector = GetComponent<OrbCollector>();
+    }
+
+    public void Init(int playerId, int maskId)
+    {
+        id = playerId;
+
+        MaskSpriteRenderer.sprite = Content.GetMaskSprite(maskId);
+        BodySpriteRenderer.color = Content.GetPlayerColor(playerId);
+        inputPrefix = Content.GetInputPrefix(playerId);
     }
 
 	/*

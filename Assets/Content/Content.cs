@@ -34,6 +34,10 @@ public class Content : ScriptableObject
 
     public List<AudioClip> FireBallThrowSounds;
     public List<AudioClip> FireBallExplodeSounds;
+    
+    public List<Color> PlayerColors;
+    public List<Sprite> Masks;
+    public List<string> InputPrefixes;
 
     private AudioClip GetRandomSound(List<AudioClip> sounds)
     {
@@ -91,5 +95,20 @@ public class Content : ScriptableObject
     public AudioClip GetRandomFireBallExplodeSound()
     {
         return GetRandomSound(FireBallExplodeSounds);
+    }
+
+    public Color GetPlayerColor(int id)
+    {
+        return PlayerColors[id];
+    }
+
+    public Sprite GetMaskSprite(int id)
+    {
+        return Masks[id];
+    }
+
+    public string GetInputPrefix(int id)
+    {
+        return InputPrefixes[id];
     }
 }
