@@ -79,8 +79,13 @@ MonoBehaviour:
   - {fileID: 21300000, guid: f62ab7ddbb1fb754fbc99e536f8db02f, type: 3}
   - {fileID: 21300000, guid: a91fd9eef4aca53438ef64dccbcbd3b1, type: 3}
   - {fileID: 21300000, guid: b8f71a70fe1410f408a2796408c9feb4, type: 3}
+  - {fileID: 21300000, guid: d008e4d5c06dde945b05cf4d7587dd9d, type: 3}
+  - {fileID: 21300000, guid: 2f955b198a4532e4e935eb985f1ce305, type: 3}
   InputPrefixes:
   - 'P1 '
   - 'P2 '
   - 'P3 '
   - 'P4 '
+  FireOrbSprite: {fileID: 21300000, guid: a5fb4429c4f36664291374c00e4e31b6, type: 3}
+  ShieldOrbSprite: {fileID: 21300000, guid: 8254eb309dd8fdb4b897e2a12b43d677, type: 3}
+  MeleeOrbSprite: {fileID: 21300000, guid: e9e3a9bc66976de49984192c1f83f874, type: 3}

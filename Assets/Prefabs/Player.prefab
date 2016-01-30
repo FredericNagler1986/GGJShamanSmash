@@ -222,7 +222,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 32ef7da07b5d7194d9fadda50107cce7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Content: {fileID: 11400000, guid: 1c06734ae0d876b42a1f2d7d66903e69, type: 2}
+  Content: {fileID: 0}
   punchLayer:
     serializedVersion: 2
     m_Bits: 512
@@ -270,6 +270,7 @@ MonoBehaviour:
   PunchHotzone: {fileID: 6106298}
   BodySpriteRenderer: {fileID: 21270334}
   MaskSpriteRenderer: {fileID: 21269144}
+  Slots: []
   Knockbackable: 1
   HP: 0
 --- !u!212 &21269144
@@ -343,6 +344,11 @@ Prefab:
       propertyPath: m_LocalPosition.x
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: Content
+      value: 
+      objectReference: {fileID: 11400000, guid: 1c06734ae0d876b42a1f2d7d66903e69,
+        type: 2}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 0}
   m_RootGameObject: {fileID: 175078}

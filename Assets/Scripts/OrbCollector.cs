@@ -14,11 +14,11 @@ public class OrbCollector : MonoBehaviour
     {
         if (other.tag == "Fire")
         {
-            CollectOrb(OrbType.Melee, other.gameObject);
+            CollectOrb(OrbType.Fire, other.gameObject);
         }
         else if (other.tag == "Shield")
         {
-            CollectOrb(OrbType.Melee, other.gameObject);
+            CollectOrb(OrbType.Shield, other.gameObject);
         }
         else if(other.tag == "Melee")
         {

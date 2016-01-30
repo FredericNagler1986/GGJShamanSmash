@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 using UnityEngine.UI;
-using System.Collections;
+using System.Collections.Generic;
 
 public class Player : MonoBehaviour
 {
@@ -17,9 +17,11 @@ public class Player : MonoBehaviour
 	public SpriteRenderer BodySpriteRenderer;
 	public SpriteRenderer MaskSpriteRenderer;
 
-	public bool Knockbackable = true;
+    public List<Image> Slots;
+    
+    public bool Knockbackable = true;
 	public int HP;
-
+    
 	bool lookleft;
 	bool grounded;
 
@@ -37,8 +39,8 @@ public class Player : MonoBehaviour
 	{
 		get { return lookleft; }
 	}
-
-	public void Init ( int playerId, int maskId, Image healthImage )
+    
+	public void Init ( int playerId, int maskId, Image healthImage, Image slot1, Image slot2, Image slot3)
 	{
 		id = playerId;
 
@@ -47,11 +49,16 @@ public class Player : MonoBehaviour
 		inputPrefix = Content.GetInputPrefix ( playerId );
 
 		HP = Content.Player.StartHP;
-
+        
 		this.healthImage = healthImage;
-	}
+	
+        Slots = new List<Image>();
+        Slots.Add(slot1);
+        Slots.Add(slot2);
+        Slots.Add(slot3);
+    }
 
-	void Start ()
+    void Start ()
 	{
 		collector = GetComponent<OrbCollector> ();
 		actionManager = GetComponent<PlayerActionManager> ();
@@ -108,10 +115,45 @@ public class Player : MonoBehaviour
 
 		myRigid.velocity = velo;
 
-		this.healthImage.fillAmount = (float)HP / (float)Content.Player.StartHP;
-	}
+        this.healthImage.fillAmount = (float)HP / (float)Content.Player.StartHP;
 
-	void Update ()
+        UpdateOrbs();
+    }
+
+    private void UpdateOrbs()
+    {
+        var collectedOrbs = collector.GetCollectedOrbs();
+
+        if (collectedOrbs == null)
+            return;
+
+        for (var i=0; i<3; i++)
+        {
+            if (i >= collectedOrbs.Count)
+            {
+                Slots[i].gameObject.SetActive(false);
+                continue;
+            }
+
+            var orbType = collectedOrbs[i];
+            if (orbType == OrbType.Fire)
+            {
+                Slots[i].sprite = Content.FireOrbSprite;
+            }
+            else if(orbType ==  OrbType.Shield)
+            {
+                Slots[i].sprite = Content.ShieldOrbSprite;
+            }
+            else if(orbType == OrbType.Melee)
+            {
+                Slots[i].sprite = Content.MeleeOrbSprite;
+            }
+
+            Slots[i].gameObject.SetActive(true);
+        }
+    }
+
+    void Update ()
 	{
 		if ( Input.GetButtonDown ( inputPrefix + "B" ) )
 		{
@@ -146,11 +188,4 @@ public class Player : MonoBehaviour
 
 		}
 	}
-
-	/*
-	void OnGUI ()
-	{
-		GUILayout.Label ( myRigid.velocity.ToString ( "" ) );
-	}
-	*/
 }

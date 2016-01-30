@@ -48,6 +48,10 @@ public class Content : ScriptableObject
     public List<Sprite> Masks;
     public List<string> InputPrefixes;
 
+    public Sprite FireOrbSprite;
+    public Sprite ShieldOrbSprite;
+    public Sprite MeleeOrbSprite;
+
     private AudioClip GetRandomSound(List<AudioClip> sounds)
     {
         if (sounds.Count == 0)
