@@ -95,6 +95,8 @@ public class OrbManager : SingletonMonoBehaviour<OrbManager>
         orbInstance.transform.position = freeTransForm.position;
         Orbs[freeTransForm].Type = newType;
         Orbs[freeTransForm].Instance = orbInstance;
+
+        SoundManager.Instance.PlaySpawnOrbSound();
     }
 
     public void CollectOrb(GameObject orbInstance)
