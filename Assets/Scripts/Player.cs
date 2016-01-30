@@ -84,7 +84,10 @@ public class Player : MonoBehaviour
 
 		if ( !Mathf.Approximately ( velo.x, 0 ) )
 		{
-			lookleft = velo.x < -0.01f;
+			if ( velo.x < -0.01f || velo.x > 0.01f )
+			{
+				lookleft = velo.x < 0;
+			}
 		}
 		
 		transform.localScale = new Vector3 ( lookleft ? -1 : 1, 1, 1 );

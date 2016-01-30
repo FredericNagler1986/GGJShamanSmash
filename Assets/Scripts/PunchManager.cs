@@ -29,7 +29,7 @@ public class PunchManager : MonoBehaviour
 		otherPlayer.HP -= MyAction.BaseDamage;
 		if ( otherPlayer.Knockbackable && MyAction.KnockbackStrength > 0 )
 		{
-			var dir = transform.position - otherPlayer.transform.position;
+			var dir = otherPlayer.transform.position - transform.position;
 			dir.Normalize ();
 			Debug.DrawRay ( otherPlayer.transform.position, dir, Color.red, 1 );
 			dir *= MyAction.KnockbackStrength;
