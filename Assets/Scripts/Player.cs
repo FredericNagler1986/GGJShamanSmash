@@ -52,12 +52,12 @@ public class Player : MonoBehaviour
 		myRigid.velocity = velo;
 
 
-		var isGround = Mathf.Abs ( velo.y ) < 0.01f;
+		var isGround = Mathf.Abs ( velo.y ) < 0.1f;
 		if ( grounded != isGround )
 		{
 			grounded = isGround;
 		}
-		if ( !grounded && velo.y < 0 )
+		if ( !grounded && velo.y < -1f )
 		{
 			myAnimator.SetTrigger ( "Falling" );
 		}
@@ -73,12 +73,13 @@ public class Player : MonoBehaviour
 		myAnimator.SetBool ( "IsGround", isGround );
 		//myAnimator.SetBool ( "IsRun", x != 0 );
 
-		//bool isGrounded = myRigid.IsTouchingLayers ( GroundLayer.value );
+		bool isGrounded = myRigid.IsTouchingLayers ( GroundLayer.value );
 		var jump = Input.GetButtonDown ( inputPrefix + "A" );
-		if ( jump && velo.y == 0 )
+		if ( (jump || y > 0.6f) && isGrounded )
 		{
 			myRigid.AddForce ( new Vector2 ( 0, Content.Player.JumpForce ) );
 			myAnimator.SetTrigger ( "Jump" );
+			myAnimator.ResetTrigger ( "Falling" );
 			Debug.Log ( inputPrefix + " jump" );
 		}
 	}
