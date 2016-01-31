@@ -14,23 +14,6 @@ public class PunchManager : MonoBehaviour
 
 	public void OnExecuteAction ( object[] args )
 	{
-		if ( MyAction.Name == "Punch" )
-		{
-			SoundManager.Instance.PlayExecutePunchSound ();
-		}
-		else if ( MyAction.Name == "Slash" )
-		{
-			SoundManager.Instance.PlaySlashSound ();
-		}
-		else if ( MyAction.Name == "Super Slash" )
-		{
-			SoundManager.Instance.PlaySlash2Sound ();
-		}
-		else if ( MyAction.Name == "Hyper Slash" )
-		{
-			SoundManager.Instance.PlaySlash3Sound ();
-		}
-
 		ownerPlayer = args[0] as Player;
 		MyAction = args[1] as PlayerAction;
 		targetPlayer = args[2] as Player;

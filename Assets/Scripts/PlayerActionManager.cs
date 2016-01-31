@@ -69,7 +69,24 @@ public class PlayerActionManager : MonoBehaviour
 
 	public bool PlayAction ( Player owner, PlayerAction action, Vector2 point0, Vector2 point1 )
 	{
-		bool flag = false;
+        if (action.Name == "Punch")
+        {
+            SoundManager.Instance.PlayExecutePunchSound();
+        }
+        else if (action.Name == "Slash")
+        {
+            SoundManager.Instance.PlaySlashSound();
+        }
+        else if (action.Name == "Super Slash")
+        {
+            SoundManager.Instance.PlaySlash2Sound();
+        }
+        else if (action.Name == "Hyper Slash")
+        {
+            SoundManager.Instance.PlaySlash3Sound();
+        }
+
+        bool flag = false;
 		var targets = Physics2D.OverlapAreaAll ( point0, point1, punchLayer.value );
 		foreach ( var target in targets )
 		{
