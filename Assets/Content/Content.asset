@@ -18,7 +18,7 @@ MonoBehaviour:
   Player:
     MoveSpeed: 5
     JumpForce: 300
-    StartHP: 5
+    StartHP: 100
     PunchCooldown: 1.2
     PunchKnockback: 1.2
     PunchLength: 0.632
@@ -32,7 +32,7 @@ MonoBehaviour:
     Knockback: 0
     SpeedModifier: 1
     DamageModifier: 1
-    BaseDamage: 0
+    BaseDamage: 1
     KnockbackStrength: 100
     Cooldown: 0
     Duration: 0
@@ -46,7 +46,7 @@ MonoBehaviour:
     SpeedModifier: 1
     DamageModifier: 1
     BaseDamage: 5
-    KnockbackStrength: 500
+    KnockbackStrength: 20
     Cooldown: 0
     Duration: 0
     CheckOrbSequence: 1
@@ -57,8 +57,8 @@ MonoBehaviour:
     Knockback: 0
     SpeedModifier: 1
     DamageModifier: 1
-    BaseDamage: 10
-    KnockbackStrength: 500
+    BaseDamage: 12
+    KnockbackStrength: 40
     Cooldown: 0
     Duration: 0
     CheckOrbSequence: 1
@@ -69,8 +69,8 @@ MonoBehaviour:
     Knockback: 0
     SpeedModifier: 1
     DamageModifier: 1
-    BaseDamage: 15
-    KnockbackStrength: 500
+    BaseDamage: 26
+    KnockbackStrength: 80
     Cooldown: 0
     Duration: 0
     CheckOrbSequence: 1
@@ -81,8 +81,8 @@ MonoBehaviour:
     Knockback: 0
     SpeedModifier: 1
     DamageModifier: 1
-    BaseDamage: 15
-    KnockbackStrength: 500
+    BaseDamage: 7
+    KnockbackStrength: 120
     Cooldown: 0
     Duration: 0
     CheckOrbSequence: 1
@@ -93,8 +93,8 @@ MonoBehaviour:
     Knockback: 0
     SpeedModifier: 1
     DamageModifier: 1
-    BaseDamage: 15
-    KnockbackStrength: 500
+    BaseDamage: 16
+    KnockbackStrength: 150
     Cooldown: 0
     Duration: 0
     CheckOrbSequence: 1
@@ -105,7 +105,7 @@ MonoBehaviour:
     Knockback: 0
     SpeedModifier: 1
     DamageModifier: 1
-    BaseDamage: 15
+    BaseDamage: 33
     KnockbackStrength: 500
     Cooldown: 0
     Duration: 0
@@ -117,10 +117,10 @@ MonoBehaviour:
     Knockback: 0
     SpeedModifier: 1
     DamageModifier: 1
-    BaseDamage: 15
-    KnockbackStrength: 500
-    Cooldown: 3
-    Duration: 3
+    BaseDamage: 0
+    KnockbackStrength: 100
+    Cooldown: 4
+    Duration: 4
     CheckOrbSequence: 1
     OrbNeeded: 02000000
     EffectPrefab: {fileID: 180616, guid: 66ab3230e4b35d04a9fb4b1b6e946ca2, type: 2}
@@ -129,10 +129,10 @@ MonoBehaviour:
     Knockback: 0
     SpeedModifier: 1
     DamageModifier: 1
-    BaseDamage: 15
-    KnockbackStrength: 500
-    Cooldown: 7
-    Duration: 7
+    BaseDamage: 0
+    KnockbackStrength: 200
+    Cooldown: 8
+    Duration: 8
     CheckOrbSequence: 1
     OrbNeeded: 0200000002000000
     EffectPrefab: {fileID: 160218, guid: 3b47963f83c376c48b06f86437b7cd01, type: 2}
@@ -141,18 +141,18 @@ MonoBehaviour:
     Knockback: 0
     SpeedModifier: 1
     DamageModifier: 1
-    BaseDamage: 15
-    KnockbackStrength: 500
-    Cooldown: 10
-    Duration: 10
+    BaseDamage: 0
+    KnockbackStrength: 200
+    Cooldown: 12
+    Duration: 12
     CheckOrbSequence: 1
     OrbNeeded: 020000000200000002000000
-    EffectPrefab: {fileID: 163482, guid: db7b1ed92b1e7f74f951c91f6569cb2f, type: 2}
+    EffectPrefab: {fileID: 160218, guid: 2eb8aeb9f59e3f74ca746af35a438cef, type: 2}
   - Name: Berserker
     AttackType: 4
     Knockback: 0
-    SpeedModifier: 1.2
-    DamageModifier: 1.2
+    SpeedModifier: 1.5
+    DamageModifier: 3
     BaseDamage: 0
     KnockbackStrength: 0
     Cooldown: 10
