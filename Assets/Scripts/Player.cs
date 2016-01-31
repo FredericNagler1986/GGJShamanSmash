@@ -20,9 +20,11 @@ public class Player : MonoBehaviour
 
 	public List<Image> Slots;
 
+	public bool Shield = false;
 	public bool Knockbackable = true;
 	public int HP;
 
+	private int jumpCount;
 	private bool lookleft;
 	private bool grounded;
 
@@ -36,15 +38,19 @@ public class Player : MonoBehaviour
 	private PlayerActionManager actionManager;
 
 	private Image healthImage;
-    
-	public bool Lookleft
+
+    public int PlayerId;
+    public int MaskId;
+
+    public bool Lookleft
 	{
 		get { return lookleft; }
 	}
 
 	public void Init ( int playerId, int maskId, Image healthImage, Image slot1, Image slot2, Image slot3 )
 	{
-		//id = playerId;
+		PlayerId = playerId;
+        MaskId = maskId;
 
 		MaskSpriteRenderer.sprite = Content.GetMaskSprite ( maskId );
 		BodySpriteRenderer.color = Content.GetPlayerColor ( playerId );
@@ -58,6 +64,16 @@ public class Player : MonoBehaviour
 		Slots.Add ( slot1 );
 		Slots.Add ( slot2 );
 		Slots.Add ( slot3 );
+	}
+
+	public bool ChangeHP(int value)
+	{
+		if ( Shield )
+		{
+			HP -= value;
+			return true;
+		}
+		return false;
 	}
 
 	void Start ()
@@ -117,7 +133,7 @@ public class Player : MonoBehaviour
 
 		myRigid.velocity = velo;
 
-		this.healthImage.fillAmount = 1.0f - (float)HP / (float)Content.Player.StartHP;
+		this.healthImage.fillAmount = 1.0f - (float)(Mathf.Min(HP, 0f)) / (float)Content.Player.StartHP;
 
 		UpdateOrbs ();
 	}

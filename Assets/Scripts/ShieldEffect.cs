@@ -24,7 +24,11 @@ public class ShieldEffect : MonoBehaviour
 
 	IEnumerator DestroyTimer ()
 	{
+		ownerPlayer.Shield = true;
+
 		yield return new WaitForSeconds ( MyAction.Duration );
+
+		ownerPlayer.Shield = false;
 
 		var ps = GetComponent<ParticleSystem> ();
 		ps.Stop ();

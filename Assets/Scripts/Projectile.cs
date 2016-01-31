@@ -92,7 +92,7 @@ public class Projectile : MonoBehaviour
             SoundManager.Instance.PlayFireBall3ExplodeSound();
         }
 
-        otherPlayer.HP -= MyAction.BaseDamage;
+        otherPlayer.ChangeHP( MyAction.BaseDamage);
 		if ( otherPlayer.Knockbackable && MyAction.KnockbackStrength > 0 )
 		{
 			var dir = transform.position - otherPlayer.transform.position;
