@@ -9,11 +9,14 @@ public class Projectile : MonoBehaviour
 	public PlayerAction MyAction;
 	public float speedModifier = 1f;
 
+	public ParticleSystem[] particleStartOnExplode;
+	public ParticleSystem[] particleStopDetachOnExplode;
+
 	void Awake ()
 	{
-		Destroy ( gameObject, Content.ProjectileLifetime );
+		StartCoroutine ( Explode ( Content.ProjectileLifetime, null ) );
 	}
-	
+
 	void Start ()
 	{
 		GetComponent<SpriteRenderer> ().flipX = Direction < 0;
@@ -27,14 +30,35 @@ public class Projectile : MonoBehaviour
 		var otherPlayer = other.GetComponentInParent<Player> ();
 		if ( ownerPlayer != otherPlayer )
 		{
-			StartCoroutine ( Explode ( otherPlayer ) );
+			StartCoroutine ( Explode ( 0.2f, otherPlayer ) );
 		}
 	}
 
-	IEnumerator Explode ( Player otherPlayer )
+	IEnumerator Explode ( float time, Player otherPlayer )
 	{
+		yield return new WaitForSeconds ( time );
+		GetComponent<Rigidbody2D> ().velocity = new Vector2 ();
 		GetComponent<Animator> ().SetTrigger ( "explode" );
-		yield return new WaitForSeconds ( 0.2f );
+		yield return new WaitForSeconds ( 1f );
+		if ( particleStartOnExplode != null )
+		{
+			foreach ( var item in particleStartOnExplode )
+			{
+				if ( item != null )
+					item.Play ();
+			}
+		}
+		if ( particleStopDetachOnExplode != null )
+		{
+			foreach ( var item in particleStopDetachOnExplode )
+			{
+				if ( item != null )
+				{
+					item.Stop ( false );
+					item.transform.parent = null;
+				}
+			}
+		}
 		Destroy ( gameObject );
 		if ( otherPlayer != null )
 			OnDoDamaged ( otherPlayer );
