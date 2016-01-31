@@ -1,55 +1,75 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class CheckOut : MonoBehaviour {
+public class CheckOut : MonoBehaviour
+{
+	public Vector2 Area;
+	private float radius;
+	private Rigidbody2D rigid;
 
-    public Vector2 Area;
+	public GameObject[] DisableOnMove;
 
-    private float radius;
-
-    private Rigidbody2D rigid;
-
-	// Use this for initialization
-	void Start () {
-        radius = GetComponentInChildren<CircleCollider2D>().radius;
-        rigid = GetComponent<Rigidbody2D>();
+	void Start ()
+	{
+		radius = GetComponentInChildren<CircleCollider2D> ().radius;
+		rigid = GetComponent<Rigidbody2D> ();
 	}
 
-    void Update()
-    {
-        var velocity = rigid.velocity;
+	void Update ()
+	{
+        if (rigid == null)
+            return;
 
-        if(velocity.x > 0 && (transform.position.x + radius) > Area.x )
-        {
-            var temp = transform.position;
-            temp.x = radius - Area.x;
-            transform.position = temp;
-        }
-        else if (velocity.x < 0 && (transform.position.x - radius) < -Area.x)
-        {
-            var temp = transform.position;
-            temp.x = Area.x - radius;
-            transform.position = temp;
-        }
-        else if ((transform.position.y - radius) < - Area.y)
-        {
-            var temp = transform.position;
-            temp.y = Area.y - radius;
-            transform.position = temp;
-        }
-    }
+		var velocity = rigid.velocity;
+		var temp = transform.position;
 
-    public void OnDrawGizmos()
-    {
-        Gizmos.color = Color.blue;
+		if ( velocity.x > 0 && (temp.x + radius) > Area.x )
+		{
+			SetObjectState ( false );
+			temp.x = radius - Area.x;
+			transform.position = temp;
+			SetObjectState ( true );
+		}
+		else if ( velocity.x < 0 && (temp.x - radius) < -Area.x )
+		{
+			SetObjectState ( false );
+			temp.x = Area.x - radius;
+			transform.position = temp;
+			SetObjectState ( true );
+		}
+		else if ( (temp.y - radius) < -Area.y )
+		{
+			SetObjectState ( false );
+			temp.y = Area.y - radius;
+			transform.position = temp;
+			SetObjectState ( true );
+		}
+	}
 
-        var p1 = new Vector3(Area.x, Area.y, 0);
-        var p2 = new Vector3(-Area.x, Area.y, 0);
-        var p3 = new Vector3(-Area.x, -Area.y, 0);
-        var p4 = new Vector3(Area.x, -Area.y, 0);
+	public void SetObjectState (bool state)
+	{
+		if ( DisableOnMove != null )
+		{
+			foreach ( var item in DisableOnMove )
+			{
+				if ( item != null )
+					item.SetActive ( state );
+			}
+		}
+	}
 
-        Gizmos.DrawLine(p1, p2);
-        Gizmos.DrawLine(p2, p3);
-        Gizmos.DrawLine(p3, p4);
-        Gizmos.DrawLine(p4, p1);    }
+	public void OnDrawGizmos ()
+	{
+		Gizmos.color = Color.blue;
+
+		var p1 = new Vector3 ( Area.x, Area.y, 0 );
+		var p2 = new Vector3 ( -Area.x, Area.y, 0 );
+		var p3 = new Vector3 ( -Area.x, -Area.y, 0 );
+		var p4 = new Vector3 ( Area.x, -Area.y, 0 );
+
+		Gizmos.DrawLine ( p1, p2 );
+		Gizmos.DrawLine ( p2, p3 );
+		Gizmos.DrawLine ( p3, p4 );
+		Gizmos.DrawLine ( p4, p1 );
+	}
 }

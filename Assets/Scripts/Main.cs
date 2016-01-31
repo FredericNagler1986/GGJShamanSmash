@@ -56,6 +56,11 @@ public class Main : SingletonMonoBehaviour<Main>
         Time.timeScale = IngameMenu.activeSelf ? 0.0f : 1.0f;
     }
 
+    public void MoveToResultScreen()
+    {
+        ResultScreen.SetActive(true);
+    }
+
     public void ExitGame()
     {
         Application.Quit();

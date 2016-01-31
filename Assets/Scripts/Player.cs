@@ -23,19 +23,19 @@ public class Player : MonoBehaviour
 	public bool Knockbackable = true;
 	public int HP;
 
-	bool lookleft;
-	bool grounded;
+	private bool lookleft;
+	private bool grounded;
 
-	//private int id;
+	private PlayerAction targetAction;
 	private string inputPrefix;
 
 	private float moveInputBlockTime;
-	private float punchBlockTime;
+	private float punchCooldown;
 	private OrbCollector collector;
 	private PlayerActionManager actionManager;
 
 	private Image healthImage;
-
+    
 	public bool Lookleft
 	{
 		get { return lookleft; }
@@ -121,7 +121,30 @@ public class Player : MonoBehaviour
 		UpdateOrbs ();
 	}
 
-	private void UpdateOrbs ()
+    public void Die()
+    {
+        var copy = Instantiate(MaskSpriteRenderer.gameObject);
+
+        MaskSpriteRenderer.enabled = false;
+
+        copy.AddComponent<BoxCollider2D>();
+        var rigid = copy.AddComponent<Rigidbody2D>();
+        rigid.AddForce(Vector2.up);
+
+        var animator = GetComponent<Animator>();
+        animator.ResetTrigger("Falling");
+        animator.ResetTrigger("Jump");
+        animator.ResetTrigger("Punch");
+        animator.ResetTrigger("Slash");
+        animator.ResetTrigger("Shoot");
+        animator.ResetTrigger("Summon");
+        animator.ResetTrigger("SummonShield");
+        animator.SetTrigger("death");
+        Destroy(this);
+        Destroy(GetComponent<Rigidbody2D>());
+    }
+
+	void UpdateOrbs ()
 	{
 		var collectedOrbs = collector.GetCollectedOrbs ();
 
@@ -156,25 +179,89 @@ public class Player : MonoBehaviour
 
 	void Update ()
 	{
-		if ( Input.GetButtonDown ( inputPrefix + "B" ) )
+        bool block = Time.time > moveInputBlockTime;
+		bool punchblock = Time.time > punchCooldown;
+		myAnimator.SetBool ( "IsBlock", !block );
+
+		// use orb effect
+		if ( block && Input.GetButtonDown ( inputPrefix + "B" ) )
 		{
-			bool isCast = actionManager.PlayAction ( this, collector.GetCollectedOrbs () );
-			Debug.Log ( "cast action " + isCast );
-			if ( isCast )
+			var action = actionManager.FindAction ( collector.GetCollectedOrbs () );
+			if ( action != null )
 			{
-				collector.ClearCollectedOrbs ();
+				Debug.Log ( "cast action " + action.Name );
+
+				switch ( action.AttackType )
+				{
+					case AttackType.Punch:
+						if ( punchblock )
+						{
+							targetAction = action;
+							collector.ClearCollectedOrbs ();
+							moveInputBlockTime = Time.time + Content.Player.PunchLength;
+							punchCooldown = Time.time + Content.Player.PunchCooldown;
+							myRigid.velocity *= 0.5f;
+							myAnimator.SetTrigger ( "Punch" );
+						}
+						break;
+					case AttackType.Slash:
+						if ( punchblock )
+						{
+							targetAction = action;
+							collector.ClearCollectedOrbs ();
+							moveInputBlockTime = Time.time + Content.Player.SlashLength;
+							punchCooldown = Time.time + Content.Player.SlashCooldown;
+							myRigid.velocity *= 0.5f;
+							myAnimator.SetTrigger ( "Slash" );
+						}
+						break;
+					case AttackType.Projectile:
+						if ( punchblock )
+						{
+							targetAction = action;
+							collector.ClearCollectedOrbs ();
+							moveInputBlockTime = Time.time + Content.Player.ProjectileLength;
+							punchCooldown = Time.time + Content.Player.ProjectileCooldown;
+							myRigid.velocity *= 0.5f;
+							myAnimator.SetTrigger ( "Shoot" );
+						}
+						break;
+					case AttackType.Summon:
+						if ( punchblock )
+						{
+							targetAction = action;
+							collector.ClearCollectedOrbs ();
+							moveInputBlockTime = Time.time + Content.Player.SummonLength;
+							punchCooldown = Time.time + Content.Player.SummonCooldown;
+							myRigid.velocity *= 0.5f;
+							myAnimator.SetTrigger ( "Summon" );
+						}
+						break;
+					case AttackType.SummonShield:
+						if ( punchblock )
+						{
+							targetAction = action;
+							collector.ClearCollectedOrbs ();
+							moveInputBlockTime = Time.time + Content.Player.SummonShieldLength;
+							punchCooldown = Time.time + Content.Player.SummonShieldCooldown;
+							myRigid.velocity *= 0.5f;
+							myAnimator.SetTrigger ( "SummonShield" );
+						}
+						break;
+				}
+
 			}
 		}
 
-		if ( Time.time > punchBlockTime && Input.GetButtonDown ( inputPrefix + "X" ) )
+		// simple punch attack
+		if ( punchblock && Input.GetButtonDown ( inputPrefix + "X" ) )
 		{
+			targetAction = Content.ActionPunch;
 			moveInputBlockTime = Time.time + Content.Player.PunchLength;
-			punchBlockTime = Time.time + Content.Player.PunchCooldown;
+			punchCooldown = Time.time + Content.Player.PunchCooldown;
 			myRigid.velocity *= 0.5f;
 			myAnimator.SetTrigger ( "Punch" );
 		}
-
-		myAnimator.SetBool ( "IsBlock", Time.time < moveInputBlockTime );
 	}
 
 	void OnPunch ()
@@ -182,11 +269,10 @@ public class Player : MonoBehaviour
 		var point0 = (Vector2)PunchHotzone.transform.position + PunchHotzone.offset - PunchHotzone.size * 0.5f;
 		var point1 = (Vector2)PunchHotzone.transform.position + PunchHotzone.offset + PunchHotzone.size * 0.5f;
 
-		bool isCast = actionManager.PlayPunch ( this, point0, point1 );
+		bool isCast = actionManager.PlayAction ( this, targetAction, point0, point1 );
 		Debug.Log ( "cast punch " + isCast );
 		if ( isCast )
 		{
-			//collector.ClearCollectedOrbs ();
 		}
 	}
 
@@ -195,11 +281,37 @@ public class Player : MonoBehaviour
 		var point0 = (Vector2)SlashHotzone.transform.position + SlashHotzone.offset - SlashHotzone.size * 0.5f;
 		var point1 = (Vector2)SlashHotzone.transform.position + SlashHotzone.offset + SlashHotzone.size * 0.5f;
 
-		bool isCast = actionManager.PlaySlash ( this, point0, point1 );
+		bool isCast = actionManager.PlayAction ( this, targetAction, point0, point1 );
 		Debug.Log ( "cast slash " + isCast );
 		if ( isCast )
 		{
-			//collector.ClearCollectedOrbs ();
+		}
+	}
+
+	void OnProjectile ()
+	{
+		bool isCast = actionManager.ExecuteAction (this, targetAction, null);
+		Debug.Log ( "cast Projectile " + isCast );
+		if ( isCast )
+		{
+		}
+	}
+
+	void OnSummon ()
+	{
+		bool isCast = actionManager.ExecuteAction ( this, targetAction, null );
+		Debug.Log ( "cast Summon " + isCast );
+		if ( isCast )
+		{
+		}
+	}
+
+	void OnSummonShield ()
+	{
+		bool isCast = actionManager.ExecuteAction ( this, targetAction, null );
+		Debug.Log ( "cast SummonShield " + isCast );
+		if ( isCast )
+		{
 		}
 	}
 }
