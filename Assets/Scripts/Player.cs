@@ -142,7 +142,7 @@ public class Player : MonoBehaviour
     {
         SoundManager.Instance.PlayDeathSound();
 
-        var copy = Instantiate(MaskSpriteRenderer.gameObject);
+        var copy = (GameObject)Instantiate(MaskSpriteRenderer.gameObject,MaskSpriteRenderer.transform.position,Quaternion.identity);
 
         MaskSpriteRenderer.enabled = false;
 
