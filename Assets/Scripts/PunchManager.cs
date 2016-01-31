@@ -46,7 +46,7 @@ public class PunchManager : MonoBehaviour
         if (otherPlayer == null)
             return;
 
-		otherPlayer.HP -= MyAction.BaseDamage;
+		otherPlayer.ChangeHP( MyAction.BaseDamage);
 		if ( otherPlayer.Knockbackable && MyAction.KnockbackStrength > 0 )
 		{
 			var dir = otherPlayer.transform.position - transform.position;
