@@ -11,6 +11,10 @@ public class LevelSelectionObject : MonoBehaviour {
     // Use this for initialization
     void Start () {
         mLevelSelectionController = LevelSelection.Instance;
+        if (LevelScene == "level1")
+        {
+            SelectLevelObject();
+        }
 	}
 
    
