@@ -27,11 +27,17 @@ public class Content : ScriptableObject
     public List<AudioClip> PunchSuccessSounds;
 
     public List<AudioClip> SlashSounds;
+    public List<AudioClip> Slash2Sounds;
+    public List<AudioClip> Slash3Sounds;
 
     public List<AudioClip> ShieldSounds;
 
     public List<AudioClip> FireBallThrowSounds;
+    public List<AudioClip> FireBall2ThrowSounds;
+    public List<AudioClip> FireBall3ThrowSounds;
     public List<AudioClip> FireBallExplodeSounds;
+    public List<AudioClip> FireBall2ExplodeSounds;
+    public List<AudioClip> FireBall3ExplodeSounds;
 
     public List<AudioClip> OrbDeniedSounds;
     public List<AudioClip> LoadPunchSounds;
@@ -89,6 +95,16 @@ public class Content : ScriptableObject
         return GetRandomSound(SlashSounds);
     }
 
+    public AudioClip GetRandomSlash2Sound()
+    {
+        return GetRandomSound(Slash2Sounds);
+    }
+
+    public AudioClip GetRandomSlash3Sound()
+    {
+        return GetRandomSound(Slash3Sounds);
+    }
+
     public AudioClip GetRandomShieldSound()
     {
         return GetRandomSound(ShieldSounds);
@@ -99,9 +115,29 @@ public class Content : ScriptableObject
         return GetRandomSound(FireBallThrowSounds);
     }
 
+    public AudioClip GetRandomFireBall2ThrowSound()
+    {
+        return GetRandomSound(FireBall2ThrowSounds);
+    }
+
+    public AudioClip GetRandomFireBall3ThrowSound()
+    {
+        return GetRandomSound(FireBall3ThrowSounds);
+    }
+
     public AudioClip GetRandomFireBallExplodeSound()
     {
         return GetRandomSound(FireBallExplodeSounds);
+    }
+
+    public AudioClip GetRandomFireBall2ExplodeSound()
+    {
+        return GetRandomSound(FireBall2ExplodeSounds);
+    }
+
+    public AudioClip GetRandomFireBall3ExplodeSound()
+    {
+        return GetRandomSound(FireBall3ExplodeSounds);
     }
 
     public AudioClip GetRandomOrbDeniedSound()

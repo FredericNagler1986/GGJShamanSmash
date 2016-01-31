@@ -123,6 +123,8 @@ public class Player : MonoBehaviour
 
     public void Die()
     {
+        SoundManager.Instance.PlayDeathSound();
+
         var copy = Instantiate(MaskSpriteRenderer.gameObject);
 
         MaskSpriteRenderer.enabled = false;
@@ -140,6 +142,21 @@ public class Player : MonoBehaviour
         animator.ResetTrigger("Summon");
         animator.ResetTrigger("SummonShield");
         animator.SetTrigger("death");
+        Destroy(this);
+        Destroy(GetComponent<Rigidbody2D>());
+    }
+
+    public void Win()
+    {
+        var animator = GetComponent<Animator>();
+        animator.ResetTrigger("Falling");
+        animator.ResetTrigger("Jump");
+        animator.ResetTrigger("Punch");
+        animator.ResetTrigger("Slash");
+        animator.ResetTrigger("Shoot");
+        animator.ResetTrigger("Summon");
+        animator.ResetTrigger("SummonShield");
+        animator.SetTrigger("win");
         Destroy(this);
         Destroy(GetComponent<Rigidbody2D>());
     }
@@ -246,6 +263,8 @@ public class Player : MonoBehaviour
 							punchCooldown = Time.time + Content.Player.SummonShieldCooldown;
 							myRigid.velocity *= 0.5f;
 							myAnimator.SetTrigger ( "SummonShield" );
+
+                            SoundManager.Instance.PlayShieldSound();
 						}
 						break;
 				}

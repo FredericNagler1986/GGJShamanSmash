@@ -86,7 +86,7 @@ MonoBehaviour:
     BaseDamage: 15
     KnockbackStrength: 500
     OrbNeeded: 03000000
-    EffectPrefab: {fileID: 185936, guid: 00f8abd2344a05841b3d5aea499377c8, type: 2}
+    EffectPrefab: {fileID: 173640, guid: 5366d363b8ea8ed40a04204eb5124aa0, type: 2}
   - Name: Super Slash
     AttackType: 2
     Knockback: 0
@@ -95,7 +95,7 @@ MonoBehaviour:
     BaseDamage: 15
     KnockbackStrength: 500
     OrbNeeded: 0300000003000000
-    EffectPrefab: {fileID: 185936, guid: 00f8abd2344a05841b3d5aea499377c8, type: 2}
+    EffectPrefab: {fileID: 173640, guid: e93acf1acec2658449c7a86bcc7e4167, type: 2}
   - Name: Hyper Slash
     AttackType: 2
     Knockback: 0
@@ -104,7 +104,7 @@ MonoBehaviour:
     BaseDamage: 15
     KnockbackStrength: 500
     OrbNeeded: 030000000300000003000000
-    EffectPrefab: {fileID: 185936, guid: 00f8abd2344a05841b3d5aea499377c8, type: 2}
+    EffectPrefab: {fileID: 138816, guid: 83c2fc91e9a49c6469ab50f8a28bb1d9, type: 2}
   - Name: Shield
     AttackType: 5
     Knockback: 0
@@ -156,12 +156,24 @@ MonoBehaviour:
   - {fileID: 8300000, guid: 2bdd67def75e5f641a4569ab2f4cd504, type: 3}
   SlashSounds:
   - {fileID: 8300000, guid: b3a98177015529b44a51c7b4361a9a34, type: 3}
+  Slash2Sounds:
+  - {fileID: 8300000, guid: 751475d4b4ea77a4e8a3a957482d5000, type: 3}
+  Slash3Sounds:
+  - {fileID: 8300000, guid: eeee63bc65d79534d849b19690e946ed, type: 3}
   ShieldSounds:
   - {fileID: 8300000, guid: 3e144e578c95bd64e9522fcdf2e0f88e, type: 3}
   FireBallThrowSounds:
   - {fileID: 8300000, guid: fd644d635b16bed43a84110da329d24d, type: 3}
+  FireBall2ThrowSounds:
+  - {fileID: 8300000, guid: 2fa6eb2cf2e53124f86a4f2635a9e573, type: 3}
+  FireBall3ThrowSounds:
+  - {fileID: 8300000, guid: de63d60d5a689e74cbe3ef317d711c46, type: 3}
   FireBallExplodeSounds:
   - {fileID: 8300000, guid: 7d9f032ef8d24a44b91e92adfacb634b, type: 3}
+  FireBall2ExplodeSounds:
+  - {fileID: 8300000, guid: 867ffc0b098027f4899455d1561a305a, type: 3}
+  FireBall3ExplodeSounds:
+  - {fileID: 8300000, guid: 344eeef23bfd5a845bf983ce2ac1dd2a, type: 3}
   OrbDeniedSounds: []
   LoadPunchSounds:
   - {fileID: 8300000, guid: 3ae5d97e544b79b4291aba95a55bdd0e, type: 3}
