@@ -13,7 +13,6 @@ public class Content : ScriptableObject
     public PlayerValues Player;
 
 	public PlayerAction ActionPunch;
-	public PlayerAction ActionSlash;
 	public PlayerAction[] Actions;
 	
     public AudioClip DefaultSound;
