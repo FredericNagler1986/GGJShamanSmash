@@ -48,12 +48,16 @@ public class GameManager : SingletonMonoBehaviour<GameManager>
 
     private IEnumerator Finish()
     {
-        if(Players.Count == 1)
-        {
-            Players[0].Win();
-        }
+        var player = Players[0];
 
+        if (Players.Count == 1)
+        {
+            player.Win();
+        }
+        
         yield return new WaitForSeconds(2);
+
+        Main.Instance.ResultData = new ResultData(player.PlayerId, player.MaskId);
 
         Main.Instance.MoveToResultScreen();
     }

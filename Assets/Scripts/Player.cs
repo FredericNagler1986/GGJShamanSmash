@@ -38,15 +38,19 @@ public class Player : MonoBehaviour
 	private PlayerActionManager actionManager;
 
 	private Image healthImage;
-    
-	public bool Lookleft
+
+    public int PlayerId;
+    public int MaskId;
+
+    public bool Lookleft
 	{
 		get { return lookleft; }
 	}
 
 	public void Init ( int playerId, int maskId, Image healthImage, Image slot1, Image slot2, Image slot3 )
 	{
-		//id = playerId;
+		PlayerId = playerId;
+        MaskId = maskId;
 
 		MaskSpriteRenderer.sprite = Content.GetMaskSprite ( maskId );
 		BodySpriteRenderer.color = Content.GetPlayerColor ( playerId );
