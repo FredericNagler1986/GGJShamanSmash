@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using UnityEngine.UI;
+using System.Collections;
 using System.Collections.Generic;
 
 public class GameManager : SingletonMonoBehaviour<GameManager>
@@ -16,11 +17,11 @@ public class GameManager : SingletonMonoBehaviour<GameManager>
 
     public Content Content;
 
-    private List<GameObject> Players;
+    private List<Player> Players;
 
     public void Start()
     {
-        Players = new List<GameObject>();
+        Players = new List<Player>();
 
         foreach(var playerStat in PlayerStats)
         {
@@ -43,6 +44,37 @@ public class GameManager : SingletonMonoBehaviour<GameManager>
         }
     }
 
+    private void Update()
+    {
+        if(Players.Count <= 1 && Main.Instance != null)
+        {
+            Main.Instance.MoveToResultScreen();
+            return;
+        }
+
+        for(var i=0; i<Players.Count; i++)
+        {
+            var player = Players[i];
+            if(player.HP <= 0)
+            {
+                Players.Remove(player);
+                StartCoroutine(RemovePlayer(player));
+                return;
+            }
+        }
+    }
+
+    private IEnumerator RemovePlayer(Player player)
+    {    
+        player.Die();
+
+        Time.timeScale = 0.25f;
+
+        yield return new WaitForSeconds(0.5f);
+        
+        Time.timeScale = 1.0f;
+    }
+
     public void ScreenShake(float force)
     {
         force = Mathf.Min(force, 0.4f);
@@ -55,8 +87,9 @@ public class GameManager : SingletonMonoBehaviour<GameManager>
         PlayerStats[playerId].SetActive(true);
         MaskSlots[playerId].sprite = Content.GetMaskSprite(maskId);
 
-        var player = (GameObject)Instantiate(PlayerPrefab, GetSpawnPoint(),Quaternion.identity);
-        player.GetComponent<Player>().Init(playerId, maskId, HealthSlots[playerId],Slots1[playerId], Slots2[playerId], Slots3[playerId]);
+        var instance = (GameObject)Instantiate(PlayerPrefab, GetSpawnPoint(),Quaternion.identity);
+        var player = instance.GetComponent<Player>();
+        player.Init(playerId, maskId, HealthSlots[playerId],Slots1[playerId], Slots2[playerId], Slots3[playerId]);
         Players.Add(player);
     }
 

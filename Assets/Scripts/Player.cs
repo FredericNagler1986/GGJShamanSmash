@@ -35,7 +35,7 @@ public class Player : MonoBehaviour
 	private PlayerActionManager actionManager;
 
 	private Image healthImage;
-
+    
 	public bool Lookleft
 	{
 		get { return lookleft; }
@@ -121,6 +121,29 @@ public class Player : MonoBehaviour
 		UpdateOrbs ();
 	}
 
+    public void Die()
+    {
+        var copy = Instantiate(MaskSpriteRenderer.gameObject);
+
+        MaskSpriteRenderer.enabled = false;
+
+        copy.AddComponent<BoxCollider2D>();
+        var rigid = copy.AddComponent<Rigidbody2D>();
+        rigid.AddForce(Vector2.up);
+
+        var animator = GetComponent<Animator>();
+        animator.ResetTrigger("Falling");
+        animator.ResetTrigger("Jump");
+        animator.ResetTrigger("Punch");
+        animator.ResetTrigger("Slash");
+        animator.ResetTrigger("Shoot");
+        animator.ResetTrigger("Summon");
+        animator.ResetTrigger("SummonShield");
+        animator.SetTrigger("death");
+        Destroy(this);
+        Destroy(GetComponent<Rigidbody2D>());
+    }
+
 	void UpdateOrbs ()
 	{
 		var collectedOrbs = collector.GetCollectedOrbs ();
@@ -156,7 +179,7 @@ public class Player : MonoBehaviour
 
 	void Update ()
 	{
-		bool block = Time.time > moveInputBlockTime;
+        bool block = Time.time > moveInputBlockTime;
 		bool punchblock = Time.time > punchCooldown;
 		myAnimator.SetBool ( "IsBlock", !block );
 

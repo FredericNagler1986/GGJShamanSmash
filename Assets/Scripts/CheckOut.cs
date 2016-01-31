@@ -17,6 +17,9 @@ public class CheckOut : MonoBehaviour {
 
     void Update()
     {
+        if (rigid == null)
+            return;
+
         var velocity = rigid.velocity;
 
         if(velocity.x > 0 && (transform.position.x + radius) > Area.x )
