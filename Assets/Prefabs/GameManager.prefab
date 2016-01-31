@@ -970,6 +970,7 @@ MonoBehaviour:
   - {fileID: 11495508}
   - {fileID: 11482692}
   Content: {fileID: 11400000, guid: 1c06734ae0d876b42a1f2d7d66903e69, type: 2}
+  UIGameObject: {fileID: 199424}
 --- !u!114 &11459306
 MonoBehaviour:
   m_ObjectHideFlags: 1

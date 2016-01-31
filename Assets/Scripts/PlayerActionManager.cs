@@ -33,18 +33,29 @@ public class PlayerActionManager : MonoBehaviour
 		foreach ( PlayerAction action in Content.Actions.OrderByDescending ( ( a ) => a.OrbNeeded.Length ) )
 		{
 			bool found = true;
-			for ( int i = 0; i < action.OrbNeeded.Length; i++ )
+			if ( action.CheckOrbSequence )
 			{
-				if ( i >= orbList.Count )
+				for ( int i = 0; i < action.OrbNeeded.Length; i++ )
 				{
-					found = false;
-					break;
+					if ( i >= orbList.Count )
+					{
+						found = false;
+						break;
+					}
+					OrbType item = action.OrbNeeded[i];
+					if ( orbList[i] != item )
+					{
+						found = false;
+						break;
+					}
 				}
-				OrbType item = action.OrbNeeded[i];
-				if ( orbList[i] != item )
+			}
+			else
+			{
+				for ( int i = 0; i < action.OrbNeeded.Length; i++ )
 				{
-					found = false;
-					break;
+					OrbType item = action.OrbNeeded[i];
+					found &= orbList.Contains ( item );
 				}
 			}
 			if ( found )

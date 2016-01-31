@@ -220,6 +220,7 @@ public class PlayerAction
 	public float Cooldown = 1f;
 	public float Duration = 0;
 
+	public bool CheckOrbSequence = true;
 	public OrbType[] OrbNeeded;
 
 	public GameObject EffectPrefab;

@@ -14,24 +14,24 @@ public class PunchManager : MonoBehaviour
 
 	public void OnExecuteAction ( object[] args )
 	{
-        if (MyAction.Name == "Punch")
-        {
-            SoundManager.Instance.PlayExecutePunchSound();
-        }
-        else if (MyAction.Name == "Slash")
-        {
-            SoundManager.Instance.PlaySlashSound();
-        }
-        else if (MyAction.Name == "Super Slash")
-        {
-            SoundManager.Instance.PlaySlash2Sound();
-        }
-        else if (MyAction.Name == "Hyper Slash")
-        {
-            SoundManager.Instance.PlaySlash3Sound();
-        }
+		if ( MyAction.Name == "Punch" )
+		{
+			SoundManager.Instance.PlayExecutePunchSound ();
+		}
+		else if ( MyAction.Name == "Slash" )
+		{
+			SoundManager.Instance.PlaySlashSound ();
+		}
+		else if ( MyAction.Name == "Super Slash" )
+		{
+			SoundManager.Instance.PlaySlash2Sound ();
+		}
+		else if ( MyAction.Name == "Hyper Slash" )
+		{
+			SoundManager.Instance.PlaySlash3Sound ();
+		}
 
-        ownerPlayer = args[0] as Player;
+		ownerPlayer = args[0] as Player;
 		MyAction = args[1] as PlayerAction;
 		targetPlayer = args[2] as Player;
 
@@ -43,10 +43,10 @@ public class PunchManager : MonoBehaviour
 
 	void OnDoDamaged ( Player otherPlayer )
 	{
-        if (otherPlayer == null)
-            return;
+		if ( otherPlayer == null )
+			return;
 
-		otherPlayer.ChangeHP( MyAction.BaseDamage);
+		otherPlayer.ChangeHP ( MyAction.BaseDamage );
 		if ( otherPlayer.Knockbackable && MyAction.KnockbackStrength > 0 )
 		{
 			var dir = otherPlayer.transform.position - transform.position;
@@ -56,9 +56,9 @@ public class PunchManager : MonoBehaviour
 			otherPlayer.myRigid.AddRelativeForce ( dir, ForceMode2D.Impulse );
 		}
 
-        if (MyAction.Name == "Punch")
-        {
-            SoundManager.Instance.PlayPunchSuccessSound();
-        }
-    }
+		if ( MyAction.Name == "Punch" )
+		{
+			SoundManager.Instance.PlayPunchSuccessSound ();
+		}
+	}
 }
