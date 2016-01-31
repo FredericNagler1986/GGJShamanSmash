@@ -52,6 +52,8 @@ public class Projectile : MonoBehaviour
 		yield return new WaitForSeconds ( time );
 		GetComponent<Rigidbody2D> ().velocity = new Vector2 ();
 		GetComponent<Animator> ().SetTrigger ( "explode" );
+		if ( otherPlayer != null )
+			OnDoDamaged ( otherPlayer );
 		yield return new WaitForSeconds ( 1f );
 		if ( particleStartOnExplode != null )
 		{
@@ -73,8 +75,6 @@ public class Projectile : MonoBehaviour
 			}
 		}
 		Destroy ( gameObject );
-		if ( otherPlayer != null )
-			OnDoDamaged ( otherPlayer );
 	}
 
 	void OnDoDamaged ( Player otherPlayer )
