@@ -31,6 +31,8 @@ public class GameManager : SingletonMonoBehaviour<GameManager>
         {
             AddPlayer(0, 0);
             AddPlayer(1, 1);
+            AddPlayer(2, 2);
+            AddPlayer(3, 3);
         }
         else
         {
