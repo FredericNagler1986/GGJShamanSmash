@@ -44,7 +44,12 @@ public class Content : ScriptableObject
 
     public List<AudioClip> FireBallThrowSounds;
     public List<AudioClip> FireBallExplodeSounds;
-    
+
+    public List<AudioClip> OrbDeniedSounds;
+    public List<AudioClip> LoadPunchSounds;
+    public List<AudioClip> BerserkSounds;
+    public List<AudioClip> BerserkEndSounds;
+
     public List<Color> PlayerColors;
     public List<Sprite> Masks;
     public List<string> InputPrefixes;
@@ -109,6 +114,26 @@ public class Content : ScriptableObject
     public AudioClip GetRandomFireBallExplodeSound()
     {
         return GetRandomSound(FireBallExplodeSounds);
+    }
+
+    public AudioClip GetRandomOrbDeniedSound()
+    {
+        return GetRandomSound(OrbDeniedSounds);
+    }
+
+    public AudioClip GetRandomLoadPunchSound()
+    {
+        return GetRandomSound(LoadPunchSounds);
+    }
+
+    public AudioClip GetRandomBerserkSound()
+    {
+        return GetRandomSound(BerserkSounds);
+    }
+
+    public AudioClip GetRandomBerserkEndSound()
+    {
+        return GetRandomSound(BerserkEndSounds);
     }
 
     public Color GetPlayerColor(int id)

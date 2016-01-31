@@ -60,4 +60,24 @@ public class SoundManager : SingletonMonoBehaviour<SoundManager>
     {
         source.PlayOneShot(Content.GetRandomFireBallExplodeSound());
     }
+
+    public void PlayOrbDeniedSound()
+    {
+        source.PlayOneShot(Content.GetRandomOrbDeniedSound());
+    }
+
+    public void PlayLoadPunchSound()
+    {
+        source.PlayOneShot(Content.GetRandomLoadPunchSound());
+    }
+
+    public void PlayBerserkSound()
+    {
+        source.PlayOneShot(Content.GetRandomBerserkSound());
+    }
+
+    public void PlayBerserkEndSound()
+    {
+        source.PlayOneShot(Content.GetRandomBerserkEndSound());
+    }
 }
