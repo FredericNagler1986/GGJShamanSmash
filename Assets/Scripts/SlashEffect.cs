@@ -48,7 +48,7 @@ public class SlashEffect : MonoBehaviour
 		if ( otherPlayer == null )
 			return;
 
-		otherPlayer.ChangeHP ( MyAction.BaseDamage );
+		otherPlayer.ChangeHP ( (int)(MyAction.BaseDamage * ownerPlayer.DamageModifier) );
 		if ( otherPlayer.Knockbackable && MyAction.KnockbackStrength > 0 )
 		{
 			var dir = otherPlayer.transform.position - transform.position;

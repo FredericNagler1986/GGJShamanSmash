@@ -151,15 +151,15 @@ MonoBehaviour:
   - Name: Berserker
     AttackType: 4
     Knockback: 0
-    SpeedModifier: 1
-    DamageModifier: 1
-    BaseDamage: 15
-    KnockbackStrength: 500
+    SpeedModifier: 1.2
+    DamageModifier: 1.2
+    BaseDamage: 0
+    KnockbackStrength: 0
     Cooldown: 10
     Duration: 10
     CheckOrbSequence: 0
     OrbNeeded: 010000000200000003000000
-    EffectPrefab: {fileID: 163482, guid: db7b1ed92b1e7f74f951c91f6569cb2f, type: 2}
+    EffectPrefab: {fileID: 116088, guid: 52b237d65588d204c93c797f8e80f7a5, type: 2}
   DefaultSound: {fileID: 8300000, guid: f205de380c9e9c54d88f1d04fddb5423, type: 3}
   DeathSounds:
   - {fileID: 8300000, guid: 5a4859657864de2468fdc7c83b72ec94, type: 3}
