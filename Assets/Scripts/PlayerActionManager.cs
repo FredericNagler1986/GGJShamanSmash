@@ -86,8 +86,8 @@ public class PlayerActionManager : MonoBehaviour
             SoundManager.Instance.PlaySlash3Sound();
         }
 
-        bool flag = false;
 		var targets = Physics2D.OverlapAreaAll ( point0, point1, punchLayer.value );
+		bool flag = false;
 		foreach ( var target in targets )
 		{
 			var player = target.GetComponentInParent<Player> ();
@@ -95,6 +95,10 @@ public class PlayerActionManager : MonoBehaviour
 			{
 				flag |= ExecuteAction ( owner, action, player );
 			}
+		}
+		if ( !flag )
+		{
+			ExecuteAction ( owner, action, null );
 		}
 		return flag;
 	}

@@ -100,6 +100,7 @@ MonoBehaviour:
     KnockbackStrength: 0
     Cooldown: 1
     Duration: 0
+    CheckOrbSequence: 1
     OrbNeeded: 
     EffectPrefab: {fileID: 0}
 --- !u!198 &19876610

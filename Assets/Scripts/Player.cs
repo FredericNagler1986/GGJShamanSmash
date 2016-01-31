@@ -295,6 +295,8 @@ public class Player : MonoBehaviour
 							cooldowns[(int)AttackType.Summon] = Time.time + targetAction.Cooldown;
 							myRigid.velocity *= 0.5f;
 							myAnimator.SetTrigger ( "Summon" );
+
+							SoundManager.Instance.PlayBerserkSound ();
 						}
 						break;
 					case AttackType.SummonShield:

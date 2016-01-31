@@ -152,11 +152,11 @@ MonoBehaviour:
     AttackType: 4
     Knockback: 0
     SpeedModifier: 1.5
-    DamageModifier: 3
+    DamageModifier: 2.5
     BaseDamage: 0
     KnockbackStrength: 0
-    Cooldown: 10
-    Duration: 10
+    Cooldown: 7
+    Duration: 7
     CheckOrbSequence: 0
     OrbNeeded: 010000000200000003000000
     EffectPrefab: {fileID: 116088, guid: 52b237d65588d204c93c797f8e80f7a5, type: 2}

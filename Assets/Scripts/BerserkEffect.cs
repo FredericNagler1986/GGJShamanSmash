@@ -30,6 +30,8 @@ public class BerserkEffect : MonoBehaviour
 
 		yield return new WaitForSeconds ( MyAction.Duration );
 
+		SoundManager.Instance.PlayBerserkEndSound ();
+
 		ownerPlayer.DamageModifier = 1;
 		ownerPlayer.SpeedModifier = 1;
 		ownerPlayer.Knockbackable = true;
