@@ -31,15 +31,40 @@ MonoBehaviour:
     KnockbackStrength: 100
     OrbNeeded: 
     EffectPrefab: {fileID: 185936, guid: 00f8abd2344a05841b3d5aea499377c8, type: 2}
+  ActionSlash:
+    Name: Action
+    Knockback: 0
+    SpeedModifier: 1
+    DamageModifier: 1
+    BaseDamage: 5
+    KnockbackStrength: 100
+    OrbNeeded: 
+    EffectPrefab: {fileID: 185936, guid: 00f8abd2344a05841b3d5aea499377c8, type: 2}
   Actions:
   - Name: Fireball
     Knockback: 0
     SpeedModifier: 1
     DamageModifier: 1
+    BaseDamage: 5
+    KnockbackStrength: 500
+    OrbNeeded: 01000000
+    EffectPrefab: {fileID: 131952, guid: 8d72e385040413448a64713f6a04ad5f, type: 2}
+  - Name: Super Fireball
+    Knockback: 0
+    SpeedModifier: 1
+    DamageModifier: 1
     BaseDamage: 10
     KnockbackStrength: 500
+    OrbNeeded: 0100000001000000
+    EffectPrefab: {fileID: 131952, guid: 52eb8fe4e15b05048aded88ea40822b9, type: 2}
+  - Name: Hyper Fireball
+    Knockback: 0
+    SpeedModifier: 1
+    DamageModifier: 1
+    BaseDamage: 15
+    KnockbackStrength: 500
     OrbNeeded: 010000000100000001000000
-    EffectPrefab: {fileID: 131952, guid: 8d72e385040413448a64713f6a04ad5f, type: 2}
+    EffectPrefab: {fileID: 131952, guid: aa2e527048ac97f45ada2c5dcd40fabe, type: 2}
   DefaultSound: {fileID: 8300000, guid: f205de380c9e9c54d88f1d04fddb5423, type: 3}
   DeathSounds:
   - {fileID: 8300000, guid: 5a4859657864de2468fdc7c83b72ec94, type: 3}
@@ -70,6 +95,19 @@ MonoBehaviour:
   - {fileID: 8300000, guid: fd644d635b16bed43a84110da329d24d, type: 3}
   FireBallExplodeSounds:
   - {fileID: 8300000, guid: 7d9f032ef8d24a44b91e92adfacb634b, type: 3}
+  OrbDeniedSounds: []
+  LoadPunchSounds:
+  - {fileID: 8300000, guid: 3ae5d97e544b79b4291aba95a55bdd0e, type: 3}
+  - {fileID: 8300000, guid: 199e9b90b3a50f64084869af116afcd4, type: 3}
+  - {fileID: 8300000, guid: 3797f9faa2bbcbd4f9919e9bfb48d074, type: 3}
+  BerserkSounds:
+  - {fileID: 8300000, guid: da537511931699141b1e6c969edc15af, type: 3}
+  - {fileID: 8300000, guid: c793940078772cb46b7140ed9a734543, type: 3}
+  - {fileID: 8300000, guid: 5a2cdb54d87c0ce458e81d7459dfa584, type: 3}
+  BerserkEndSounds:
+  - {fileID: 8300000, guid: 7498a21453d148640958e10bbb54d672, type: 3}
+  - {fileID: 8300000, guid: fa29add52471ed54fb4b5482622ad463, type: 3}
+  - {fileID: 8300000, guid: 59cab542b9bc57b44b3a23ff0514ddf8, type: 3}
   PlayerColors:
   - {r: 0.8528905, g: 1, b: 0.6613322, a: 1}
   - {r: 0.30882353, g: 0.9713995, b: 1, a: 1}
@@ -86,6 +124,6 @@ MonoBehaviour:
   - 'P2 '
   - 'P3 '
   - 'P4 '
-  FireOrbSprite: {fileID: 21300000, guid: a5fb4429c4f36664291374c00e4e31b6, type: 3}
-  ShieldOrbSprite: {fileID: 21300000, guid: 8254eb309dd8fdb4b897e2a12b43d677, type: 3}
-  MeleeOrbSprite: {fileID: 21300000, guid: e9e3a9bc66976de49984192c1f83f874, type: 3}
+  FireOrbSprite: {fileID: 21300000, guid: 8254eb309dd8fdb4b897e2a12b43d677, type: 3}
+  ShieldOrbSprite: {fileID: 21300000, guid: e9e3a9bc66976de49984192c1f83f874, type: 3}
+  MeleeOrbSprite: {fileID: 21300000, guid: a5fb4429c4f36664291374c00e4e31b6, type: 3}

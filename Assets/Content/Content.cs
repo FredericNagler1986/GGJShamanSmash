@@ -13,6 +13,7 @@ public class Content : ScriptableObject
     public PlayerValues Player;
 
 	public PlayerAction ActionPunch;
+	public PlayerAction ActionSlash;
 	public PlayerAction[] Actions;
 
 
@@ -43,7 +44,12 @@ public class Content : ScriptableObject
 
     public List<AudioClip> FireBallThrowSounds;
     public List<AudioClip> FireBallExplodeSounds;
-    
+
+    public List<AudioClip> OrbDeniedSounds;
+    public List<AudioClip> LoadPunchSounds;
+    public List<AudioClip> BerserkSounds;
+    public List<AudioClip> BerserkEndSounds;
+
     public List<Color> PlayerColors;
     public List<Sprite> Masks;
     public List<string> InputPrefixes;
@@ -110,6 +116,26 @@ public class Content : ScriptableObject
         return GetRandomSound(FireBallExplodeSounds);
     }
 
+    public AudioClip GetRandomOrbDeniedSound()
+    {
+        return GetRandomSound(OrbDeniedSounds);
+    }
+
+    public AudioClip GetRandomLoadPunchSound()
+    {
+        return GetRandomSound(LoadPunchSounds);
+    }
+
+    public AudioClip GetRandomBerserkSound()
+    {
+        return GetRandomSound(BerserkSounds);
+    }
+
+    public AudioClip GetRandomBerserkEndSound()
+    {
+        return GetRandomSound(BerserkEndSounds);
+    }
+
     public Color GetPlayerColor(int id)
     {
         return PlayerColors[id];
@@ -126,11 +152,16 @@ public class Content : ScriptableObject
     }
 }
 
+public enum AttackType
+{
+	Punch, Slash, Projectile
+}
 
 [Serializable]
 public class PlayerAction
 {
 	public string Name = "Action";
+	public AttackType AttackType;
 	// player mod values
 	public bool Knockback = false;
 	public float SpeedModifier = 1f;

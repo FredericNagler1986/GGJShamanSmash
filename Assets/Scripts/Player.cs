@@ -13,19 +13,20 @@ public class Player : MonoBehaviour
 	public LayerMask GroundLayer;
 
 	public BoxCollider2D PunchHotzone;
+	public BoxCollider2D SlashHotzone;
 
 	public SpriteRenderer BodySpriteRenderer;
 	public SpriteRenderer MaskSpriteRenderer;
 
-    public List<Image> Slots;
-    
-    public bool Knockbackable = true;
+	public List<Image> Slots;
+
+	public bool Knockbackable = true;
 	public int HP;
-    
+
 	bool lookleft;
 	bool grounded;
 
-	private int id;
+	//private int id;
 	private string inputPrefix;
 
 	private float moveInputBlockTime;
@@ -39,26 +40,26 @@ public class Player : MonoBehaviour
 	{
 		get { return lookleft; }
 	}
-    
-	public void Init ( int playerId, int maskId, Image healthImage, Image slot1, Image slot2, Image slot3)
+
+	public void Init ( int playerId, int maskId, Image healthImage, Image slot1, Image slot2, Image slot3 )
 	{
-		id = playerId;
+		//id = playerId;
 
 		MaskSpriteRenderer.sprite = Content.GetMaskSprite ( maskId );
 		BodySpriteRenderer.color = Content.GetPlayerColor ( playerId );
 		inputPrefix = Content.GetInputPrefix ( playerId );
 
 		HP = Content.Player.StartHP;
-        
-		this.healthImage = healthImage;
-	
-        Slots = new List<Image>();
-        Slots.Add(slot1);
-        Slots.Add(slot2);
-        Slots.Add(slot3);
-    }
 
-    void Start ()
+		this.healthImage = healthImage;
+
+		Slots = new List<Image> ();
+		Slots.Add ( slot1 );
+		Slots.Add ( slot2 );
+		Slots.Add ( slot3 );
+	}
+
+	void Start ()
 	{
 		collector = GetComponent<OrbCollector> ();
 		actionManager = GetComponent<PlayerActionManager> ();
@@ -96,7 +97,7 @@ public class Player : MonoBehaviour
 				lookleft = velo.x < 0;
 			}
 		}
-		
+
 		transform.localScale = new Vector3 ( lookleft ? -1 : 1, 1, 1 );
 
 		var speedMod = Mathf.Abs ( velo.x ) / Content.Player.MoveSpeed;
@@ -115,53 +116,53 @@ public class Player : MonoBehaviour
 
 		myRigid.velocity = velo;
 
-        this.healthImage.fillAmount = (float)HP / (float)Content.Player.StartHP;
+		this.healthImage.fillAmount = (float)HP / (float)Content.Player.StartHP;
 
-        UpdateOrbs();
-    }
+		UpdateOrbs ();
+	}
 
-    private void UpdateOrbs()
-    {
-        var collectedOrbs = collector.GetCollectedOrbs();
+	private void UpdateOrbs ()
+	{
+		var collectedOrbs = collector.GetCollectedOrbs ();
 
-        if (collectedOrbs == null)
-            return;
+		if ( collectedOrbs == null )
+			return;
 
-        for (var i=0; i<3; i++)
-        {
-            if (i >= collectedOrbs.Count)
-            {
-                Slots[i].gameObject.SetActive(false);
-                continue;
-            }
+		for ( var i = 0; i < 3; i++ )
+		{
+			if ( i >= collectedOrbs.Count )
+			{
+				Slots[i].gameObject.SetActive ( false );
+				continue;
+			}
 
-            var orbType = collectedOrbs[i];
-            if (orbType == OrbType.Fire)
-            {
-                Slots[i].sprite = Content.FireOrbSprite;
-            }
-            else if(orbType ==  OrbType.Shield)
-            {
-                Slots[i].sprite = Content.ShieldOrbSprite;
-            }
-            else if(orbType == OrbType.Melee)
-            {
-                Slots[i].sprite = Content.MeleeOrbSprite;
-            }
+			var orbType = collectedOrbs[i];
+			if ( orbType == OrbType.Fire )
+			{
+				Slots[i].sprite = Content.FireOrbSprite;
+			}
+			else if ( orbType == OrbType.Shield )
+			{
+				Slots[i].sprite = Content.ShieldOrbSprite;
+			}
+			else if ( orbType == OrbType.Melee )
+			{
+				Slots[i].sprite = Content.MeleeOrbSprite;
+			}
 
-            Slots[i].gameObject.SetActive(true);
-        }
-    }
+			Slots[i].gameObject.SetActive ( true );
+		}
+	}
 
-    void Update ()
+	void Update ()
 	{
 		if ( Input.GetButtonDown ( inputPrefix + "B" ) )
 		{
 			bool isCast = actionManager.PlayAction ( this, collector.GetCollectedOrbs () );
 			Debug.Log ( "cast action " + isCast );
-			if ( !isCast )
+			if ( isCast )
 			{
-
+				collector.ClearCollectedOrbs ();
 			}
 		}
 
@@ -183,9 +184,22 @@ public class Player : MonoBehaviour
 
 		bool isCast = actionManager.PlayPunch ( this, point0, point1 );
 		Debug.Log ( "cast punch " + isCast );
-		if ( !isCast )
+		if ( isCast )
 		{
+			//collector.ClearCollectedOrbs ();
+		}
+	}
 
+	void OnSlash ()
+	{
+		var point0 = (Vector2)SlashHotzone.transform.position + SlashHotzone.offset - SlashHotzone.size * 0.5f;
+		var point1 = (Vector2)SlashHotzone.transform.position + SlashHotzone.offset + SlashHotzone.size * 0.5f;
+
+		bool isCast = actionManager.PlaySlash ( this, point0, point1 );
+		Debug.Log ( "cast slash " + isCast );
+		if ( isCast )
+		{
+			//collector.ClearCollectedOrbs ();
 		}
 	}
 }
