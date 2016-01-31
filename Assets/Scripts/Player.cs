@@ -20,6 +20,8 @@ public class Player : MonoBehaviour
 
 	public List<Image> Slots;
 
+    public GroundedHandler groundedHandler;
+
 	public bool Shield = false;
 	public bool Knockbackable = true;
 	public int HP;
@@ -122,7 +124,7 @@ public class Player : MonoBehaviour
 		myAnimator.SetFloat ( "Speed", speedMod );
 		myAnimator.SetBool ( "IsGround", isGround );
 
-		bool isGrounded = myRigid.IsTouchingLayers ( GroundLayer.value );
+        bool isGrounded = groundedHandler.Grounded;// myRigid.IsTouchingLayers ( GroundLayer.value );
 		var jump = Input.GetButtonDown ( inputPrefix + "A" );
 		if ( (((jump || y > 0.6f) && isGrounded) || (jump && jumpCount < 2))
 			&& blockMoveInput 
