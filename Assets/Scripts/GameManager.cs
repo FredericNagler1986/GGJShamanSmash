@@ -43,6 +43,8 @@ public class GameManager : SingletonMonoBehaviour<GameManager>
 
     public void ScreenShake(float force)
     {
+        force = Mathf.Min(force, 0.4f);
+
         iTween.ShakePosition(Camera.main.gameObject, iTween.Hash("x", force, "y", force, "time", 1.0f));
     }
 
