@@ -41,6 +41,21 @@ public class PlayerActionManager : MonoBehaviour
 		return null;
 	}
 
+	public bool PlayAction ( Player owner, PlayerAction action, Vector2 point0, Vector2 point1 )
+	{
+		bool flag = false;
+		var targets = Physics2D.OverlapAreaAll ( point0, point1, punchLayer.value );
+		foreach ( var target in targets )
+		{
+			var player = target.GetComponentInParent<Player> ();
+			if ( player != null && player != owner )
+			{
+				flag |= ExecuteAction ( owner, action, player );
+			}
+		}
+		return flag;
+	}
+	/*
 	public bool PlayPunch ( Player owner, Vector2 point0, Vector2 point1 )
 	{
 		bool flag = false;
@@ -70,7 +85,7 @@ public class PlayerActionManager : MonoBehaviour
 		}
 		return flag;
 	}
-
+	*/
 	public bool ExecuteAction ( Player owner, PlayerAction action, Player target )
 	{
 		if ( action.EffectPrefab == null )

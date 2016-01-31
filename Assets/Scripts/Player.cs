@@ -185,14 +185,44 @@ public class Player : MonoBehaviour
 						}
 						break;
 					case AttackType.Projectile:
+						if ( punchblock )
+						{
+							targetAction = action;
+							moveInputBlockTime = Time.time + Content.Player.ProjectileLength;
+							punchCooldown = Time.time + Content.Player.ProjectileCooldown;
+							myRigid.velocity *= 0.5f;
+							myAnimator.SetTrigger ( "Shoot" );
+						}
+						break;
+					case AttackType.Summon:
+						if ( punchblock )
+						{
+							targetAction = action;
+							moveInputBlockTime = Time.time + Content.Player.SummonLength;
+							punchCooldown = Time.time + Content.Player.SummonCooldown;
+							myRigid.velocity *= 0.5f;
+							myAnimator.SetTrigger ( "Summon" );
+						}
+						break;
+					case AttackType.SummonShield:
+						if ( punchblock )
+						{
+							targetAction = action;
+							moveInputBlockTime = Time.time + Content.Player.SummonShieldLength;
+							punchCooldown = Time.time + Content.Player.SummonShieldCooldown;
+							myRigid.velocity *= 0.5f;
+							myAnimator.SetTrigger ( "SummonShield" );
+						}
 						break;
 				}
 
 			}
 		}
 
+		// simple punch attack
 		if ( punchblock && Input.GetButtonDown ( inputPrefix + "X" ) )
 		{
+			targetAction = Content.ActionPunch;
 			moveInputBlockTime = Time.time + Content.Player.PunchLength;
 			punchCooldown = Time.time + Content.Player.PunchCooldown;
 			myRigid.velocity *= 0.5f;
@@ -211,11 +241,10 @@ public class Player : MonoBehaviour
 		var point0 = (Vector2)PunchHotzone.transform.position + PunchHotzone.offset - PunchHotzone.size * 0.5f;
 		var point1 = (Vector2)PunchHotzone.transform.position + PunchHotzone.offset + PunchHotzone.size * 0.5f;
 
-		bool isCast = actionManager.PlayPunch ( this, point0, point1 );
+		bool isCast = actionManager.PlayAction ( this, targetAction, point0, point1 );
 		Debug.Log ( "cast punch " + isCast );
 		if ( isCast )
 		{
-			//collector.ClearCollectedOrbs ();
 		}
 	}
 
@@ -224,11 +253,37 @@ public class Player : MonoBehaviour
 		var point0 = (Vector2)SlashHotzone.transform.position + SlashHotzone.offset - SlashHotzone.size * 0.5f;
 		var point1 = (Vector2)SlashHotzone.transform.position + SlashHotzone.offset + SlashHotzone.size * 0.5f;
 
-		bool isCast = actionManager.PlaySlash ( this, point0, point1 );
+		bool isCast = actionManager.PlayAction ( this, targetAction, point0, point1 );
 		Debug.Log ( "cast slash " + isCast );
 		if ( isCast )
 		{
-			//collector.ClearCollectedOrbs ();
+		}
+	}
+
+	void OnProjectile ()
+	{
+		bool isCast = actionManager.ExecuteAction (this, targetAction, null);
+		Debug.Log ( "cast Projectile " + isCast );
+		if ( isCast )
+		{
+		}
+	}
+
+	void OnSummon ()
+	{
+		bool isCast = actionManager.ExecuteAction ( this, targetAction, null );
+		Debug.Log ( "cast Summon " + isCast );
+		if ( isCast )
+		{
+		}
+	}
+
+	void OnSummonShield ()
+	{
+		bool isCast = actionManager.ExecuteAction ( this, targetAction, null );
+		Debug.Log ( "cast SummonShield " + isCast );
+		if ( isCast )
+		{
 		}
 	}
 }
