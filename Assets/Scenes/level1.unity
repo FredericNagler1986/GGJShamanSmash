@@ -670,56 +670,6 @@ Prefab:
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: bb9aea43e08fcc1498aa7e8f18c1fe97, type: 2}
   m_IsPrefabParent: 0
---- !u!1001 &1647538185
-Prefab:
-  m_ObjectHideFlags: 0
-  serializedVersion: 2
-  m_Modification:
-    m_TransformParent: {fileID: 0}
-    m_Modifications:
-    - target: {fileID: 477816, guid: aa2e527048ac97f45ada2c5dcd40fabe, type: 2}
-      propertyPath: m_LocalPosition.x
-      value: 2.19
-      objectReference: {fileID: 0}
-    - target: {fileID: 477816, guid: aa2e527048ac97f45ada2c5dcd40fabe, type: 2}
-      propertyPath: m_LocalPosition.y
-      value: -1.37
-      objectReference: {fileID: 0}
-    - target: {fileID: 477816, guid: aa2e527048ac97f45ada2c5dcd40fabe, type: 2}
-      propertyPath: m_LocalPosition.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 477816, guid: aa2e527048ac97f45ada2c5dcd40fabe, type: 2}
-      propertyPath: m_LocalRotation.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 477816, guid: aa2e527048ac97f45ada2c5dcd40fabe, type: 2}
-      propertyPath: m_LocalRotation.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 477816, guid: aa2e527048ac97f45ada2c5dcd40fabe, type: 2}
-      propertyPath: m_LocalRotation.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 477816, guid: aa2e527048ac97f45ada2c5dcd40fabe, type: 2}
-      propertyPath: m_LocalRotation.w
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 477816, guid: aa2e527048ac97f45ada2c5dcd40fabe, type: 2}
-      propertyPath: m_RootOrder
-      value: 3
-      objectReference: {fileID: 0}
-    - target: {fileID: 19842590, guid: aa2e527048ac97f45ada2c5dcd40fabe, type: 2}
-      propertyPath: InitialModule.startSize.scalar
-      value: 0.9
-      objectReference: {fileID: 0}
-    - target: {fileID: 19842590, guid: aa2e527048ac97f45ada2c5dcd40fabe, type: 2}
-      propertyPath: InitialModule.startSize.minCurve.m_Curve.Array.data[0].value
-      value: 0.5555556
-      objectReference: {fileID: 0}
-    m_RemovedComponents: []
-  m_ParentPrefab: {fileID: 100100000, guid: aa2e527048ac97f45ada2c5dcd40fabe, type: 2}
-  m_IsPrefabParent: 0
 --- !u!1 &1741739251
 GameObject:
   m_ObjectHideFlags: 0
