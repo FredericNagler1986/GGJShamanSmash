@@ -171,13 +171,21 @@ public class Player : MonoBehaviour
 				switch ( action.AttackType )
 				{
 					case AttackType.Punch:
-						collector.ClearCollectedOrbs ();
-						actionManager.ExecuteAction ( this, action, null );
+						if ( punchblock )
+						{
+							targetAction = action;
+							collector.ClearCollectedOrbs ();
+							moveInputBlockTime = Time.time + Content.Player.PunchLength;
+							punchCooldown = Time.time + Content.Player.PunchCooldown;
+							myRigid.velocity *= 0.5f;
+							myAnimator.SetTrigger ( "Punch" );
+						}
 						break;
 					case AttackType.Slash:
 						if ( punchblock )
 						{
 							targetAction = action;
+							collector.ClearCollectedOrbs ();
 							moveInputBlockTime = Time.time + Content.Player.SlashLength;
 							punchCooldown = Time.time + Content.Player.SlashCooldown;
 							myRigid.velocity *= 0.5f;
@@ -188,6 +196,7 @@ public class Player : MonoBehaviour
 						if ( punchblock )
 						{
 							targetAction = action;
+							collector.ClearCollectedOrbs ();
 							moveInputBlockTime = Time.time + Content.Player.ProjectileLength;
 							punchCooldown = Time.time + Content.Player.ProjectileCooldown;
 							myRigid.velocity *= 0.5f;
@@ -198,6 +207,7 @@ public class Player : MonoBehaviour
 						if ( punchblock )
 						{
 							targetAction = action;
+							collector.ClearCollectedOrbs ();
 							moveInputBlockTime = Time.time + Content.Player.SummonLength;
 							punchCooldown = Time.time + Content.Player.SummonCooldown;
 							myRigid.velocity *= 0.5f;
@@ -208,6 +218,7 @@ public class Player : MonoBehaviour
 						if ( punchblock )
 						{
 							targetAction = action;
+							collector.ClearCollectedOrbs ();
 							moveInputBlockTime = Time.time + Content.Player.SummonShieldLength;
 							punchCooldown = Time.time + Content.Player.SummonShieldCooldown;
 							myRigid.velocity *= 0.5f;
@@ -227,12 +238,6 @@ public class Player : MonoBehaviour
 			punchCooldown = Time.time + Content.Player.PunchCooldown;
 			myRigid.velocity *= 0.5f;
 			myAnimator.SetTrigger ( "Punch" );
-		}
-
-
-		if ( Debug.isDebugBuild && Input.GetKeyUp ( KeyCode.C ) )
-		{
-			collector.ClearCollectedOrbs ();
 		}
 	}
 
