@@ -68,7 +68,7 @@ public class Player : MonoBehaviour
 
 	public bool ChangeHP(int value)
 	{
-		if ( Shield )
+		if ( !Shield )
 		{
 			HP -= value;
 			return true;
