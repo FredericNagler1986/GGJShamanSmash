@@ -27,6 +27,7 @@ GameObject:
   - 4: {fileID: 463364}
   - 95: {fileID: 9529996}
   - 212: {fileID: 21230164}
+  - 114: {fileID: 11481628}
   m_Layer: 0
   m_Name: Slash lvl 3
   m_TagString: Untagged
@@ -76,6 +77,31 @@ Animator:
   m_WarningMessage: 
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
+--- !u!114 &11481628
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 138816}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cfc005fbcd696864492c794eeda78235, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ownerPlayer: {fileID: 0}
+  targetPlayer: {fileID: 0}
+  MyAction:
+    Name: Action
+    AttackType: 0
+    Knockback: 0
+    SpeedModifier: 1
+    DamageModifier: 1
+    BaseDamage: 0
+    KnockbackStrength: 0
+    Cooldown: 1
+    Duration: 0
+    OrbNeeded: 
+    EffectPrefab: {fileID: 0}
 --- !u!198 &19876610
 ParticleSystem:
   m_ObjectHideFlags: 1
