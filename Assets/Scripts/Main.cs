@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 using UnityEngine.SceneManagement;
+using System;
 
 public class Main : SingletonMonoBehaviour<Main>
 {
@@ -8,6 +9,9 @@ public class Main : SingletonMonoBehaviour<Main>
     public GameObject ResultScreen = null;
     [SerializeField]
     public GameData GameData = null;
+    public GameObject IngameMenu = null;
+
+    public Content GameContent;
 
     void Awake()
     {
@@ -36,6 +40,20 @@ public class Main : SingletonMonoBehaviour<Main>
                 
             }
         }
+        if (Input.GetKeyDown(KeyCode.Escape))
+        {
+            if(IngameMenu != null && GameState == EGameState.Ingame)
+            {
+                ToggleIngameMenu();
+
+            }
+        }
+    }
+
+    public void ToggleIngameMenu()
+    {
+        IngameMenu.SetActive(!IngameMenu.activeSelf);
+        Time.timeScale = IngameMenu.activeSelf ? 0.0f : 1.0f;
     }
 
     public void ExitGame()

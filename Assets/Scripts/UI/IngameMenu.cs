@@ -20,6 +20,7 @@ public class IngameMenu : MonoBehaviour {
 
     public void BackToMainMenu()
     {
+        Time.timeScale = 1.0f;
         LevelManager.Instance.LoadAndFadeToLevel("MainMenu");
     }
 }
