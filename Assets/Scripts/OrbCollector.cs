@@ -62,8 +62,8 @@ public class OrbCollector : MonoBehaviour
         return CollectedOrbs;
     }
 
-    public void ClearCollectedOrbs()
-    {
-        CollectedOrbs.Clear();
-    }
+	public void ClearCollectedOrbs ()
+	{
+		CollectedOrbs.Clear ();
+	}
 }

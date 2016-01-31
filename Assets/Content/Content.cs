@@ -178,7 +178,8 @@ public class Content : ScriptableObject
 
 public enum AttackType
 {
-	None, Punch, Slash, Projectile, Summon, SummonShield
+	None, Punch, Slash, Projectile, Summon, SummonShield,
+	_Count
 }
 
 [Serializable]
@@ -187,21 +188,19 @@ public class PlayerValues
 	public float MoveSpeed = 100;
 	public float JumpForce = 100;
 	public int StartHP = 100;
-	public float PunchLength = 0.632f;
+
 	public float PunchCooldown = 1.2f;
 	public float PunchKnockback = 1.2f;
 
+	public float PunchLength = 0.632f;
+
 	public float SlashLength = 1.2f;
-	public float SlashCooldown = 1.2f;
 
 	public float ProjectileLength = 1.2f;
-	public float ProjectileCooldown = 1.2f;
 
 	public float SummonLength = 1.2f;
-	public float SummonCooldown = 1.2f;
 
 	public float SummonShieldLength = 1.2f;
-	public float SummonShieldCooldown = 1.2f;
 }
 
 [Serializable]
@@ -217,6 +216,10 @@ public class PlayerAction
 	// 
 	public int BaseDamage = 0;
 	public int KnockbackStrength = 0;
+
+	//
+	public float Cooldown = 1f;
+	public float Duration = 0;
 
 	public OrbType[] OrbNeeded;
 

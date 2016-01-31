@@ -10,6 +10,7 @@ GameObject:
   - 4: {fileID: 434346}
   - 198: {fileID: 19871946}
   - 199: {fileID: 19909072}
+  - 114: {fileID: 11406902}
   m_Layer: 0
   m_Name: blatt
   m_TagString: Untagged
@@ -27,6 +28,7 @@ GameObject:
   - 4: {fileID: 444958}
   - 198: {fileID: 19809630}
   - 199: {fileID: 19944022}
+  - 114: {fileID: 11436380}
   m_Layer: 0
   m_Name: PlayerShield lvl 1
   m_TagString: Untagged
@@ -59,6 +61,43 @@ Transform:
   - {fileID: 434346}
   m_Father: {fileID: 0}
   m_RootOrder: 0
+--- !u!114 &11406902
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 135178}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c9315904f25dbf541ac0a2292f2f60f7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ps: {fileID: 0}
+--- !u!114 &11436380
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 180616}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3f1f4754ccc6f2249957626a2405b246, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ownerPlayer: {fileID: 0}
+  MyAction:
+    Name: Action
+    AttackType: 0
+    Knockback: 0
+    SpeedModifier: 1
+    DamageModifier: 1
+    BaseDamage: 0
+    KnockbackStrength: 0
+    Cooldown: 0
+    Duration: 0
+    OrbNeeded: 
+    EffectPrefab: {fileID: 0}
+  AppendOnPlayer: 1
 --- !u!198 &19809630
 ParticleSystem:
   m_ObjectHideFlags: 1
