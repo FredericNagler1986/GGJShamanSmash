@@ -26,6 +26,9 @@ public class PunchManager : MonoBehaviour
 
 	void OnDoDamaged ( Player otherPlayer )
 	{
+        if (otherPlayer == null)
+            return;
+
 		otherPlayer.HP -= MyAction.BaseDamage;
 		if ( otherPlayer.Knockbackable && MyAction.KnockbackStrength > 0 )
 		{
