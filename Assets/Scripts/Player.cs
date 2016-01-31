@@ -75,6 +75,8 @@ public class Player : MonoBehaviour
 	{
 		if ( !Shield )
 		{
+            GameManager.Instance.ScreenShake(0.15f);
+
 			HP -= value;
 			return true;
 		}
