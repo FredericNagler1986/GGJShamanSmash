@@ -31,15 +31,40 @@ MonoBehaviour:
     KnockbackStrength: 100
     OrbNeeded: 
     EffectPrefab: {fileID: 185936, guid: 00f8abd2344a05841b3d5aea499377c8, type: 2}
+  ActionSlash:
+    Name: Action
+    Knockback: 0
+    SpeedModifier: 1
+    DamageModifier: 1
+    BaseDamage: 5
+    KnockbackStrength: 100
+    OrbNeeded: 
+    EffectPrefab: {fileID: 185936, guid: 00f8abd2344a05841b3d5aea499377c8, type: 2}
   Actions:
   - Name: Fireball
     Knockback: 0
     SpeedModifier: 1
     DamageModifier: 1
+    BaseDamage: 5
+    KnockbackStrength: 500
+    OrbNeeded: 01000000
+    EffectPrefab: {fileID: 131952, guid: 8d72e385040413448a64713f6a04ad5f, type: 2}
+  - Name: Super Fireball
+    Knockback: 0
+    SpeedModifier: 1
+    DamageModifier: 1
     BaseDamage: 10
     KnockbackStrength: 500
+    OrbNeeded: 0100000001000000
+    EffectPrefab: {fileID: 131952, guid: 52eb8fe4e15b05048aded88ea40822b9, type: 2}
+  - Name: Hyper Fireball
+    Knockback: 0
+    SpeedModifier: 1
+    DamageModifier: 1
+    BaseDamage: 15
+    KnockbackStrength: 500
     OrbNeeded: 010000000100000001000000
-    EffectPrefab: {fileID: 131952, guid: 8d72e385040413448a64713f6a04ad5f, type: 2}
+    EffectPrefab: {fileID: 131952, guid: aa2e527048ac97f45ada2c5dcd40fabe, type: 2}
   DefaultSound: {fileID: 8300000, guid: f205de380c9e9c54d88f1d04fddb5423, type: 3}
   DeathSounds:
   - {fileID: 8300000, guid: 5a4859657864de2468fdc7c83b72ec94, type: 3}

@@ -13,6 +13,7 @@ public class Content : ScriptableObject
     public PlayerValues Player;
 
 	public PlayerAction ActionPunch;
+	public PlayerAction ActionSlash;
 	public PlayerAction[] Actions;
 
 
@@ -151,11 +152,16 @@ public class Content : ScriptableObject
     }
 }
 
+public enum AttackType
+{
+	Punch, Slash, Projectile
+}
 
 [Serializable]
 public class PlayerAction
 {
 	public string Name = "Action";
+	public AttackType AttackType;
 	// player mod values
 	public bool Knockback = false;
 	public float SpeedModifier = 1f;
