@@ -192,13 +192,9 @@ public class PlayerValues
 	public float PunchKnockback = 1.2f;
 
 	public float PunchLength = 0.632f;
-
 	public float SlashLength = 1.2f;
-
 	public float ProjectileLength = 1.2f;
-
 	public float SummonLength = 1.2f;
-
 	public float SummonShieldLength = 1.2f;
 }
 

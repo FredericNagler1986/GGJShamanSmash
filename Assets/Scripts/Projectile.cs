@@ -24,36 +24,40 @@ public class Projectile : MonoBehaviour
 		float normalizedDirection = Direction >= 0 ? 1 : -1;
 		GetComponent<Rigidbody2D> ().velocity = new Vector2 ( normalizedDirection * Content.ProjectileSpeed * speedModifier, 0 );
 
-        if (MyAction.Name == "Fireball")
-        {
-            SoundManager.Instance.PlayFireBallThrowSound();
-        }
-        else if (MyAction.Name == "Super Fireball")
-        {
-            SoundManager.Instance.PlayFireBall2ThrowSound();
-        }
-        else if (MyAction.Name == "Hyper Fireball")
-        {
-            SoundManager.Instance.PlayFireBall3ThrowSound();
-        }
-    }
+		if ( MyAction.Name == "Fireball" )
+		{
+			SoundManager.Instance.PlayFireBallThrowSound ();
+		}
+		else if ( MyAction.Name == "Super Fireball" )
+		{
+			SoundManager.Instance.PlayFireBall2ThrowSound ();
+		}
+		else if ( MyAction.Name == "Hyper Fireball" )
+		{
+			SoundManager.Instance.PlayFireBall3ThrowSound ();
+		}
+	}
 
 	void OnTriggerEnter2D ( Collider2D other )
 	{
 		var otherPlayer = other.GetComponentInParent<Player> ();
 		if ( ownerPlayer != otherPlayer )
 		{
-			StartCoroutine ( Explode ( 0.2f, otherPlayer ) );
+			StartCoroutine ( Explode ( 0, otherPlayer ) );
 		}
 	}
 
 	IEnumerator Explode ( float time, Player otherPlayer )
 	{
-		yield return new WaitForSeconds ( time );
+		if ( time > 0 )
+			yield return new WaitForSeconds ( time );
 		GetComponent<Rigidbody2D> ().velocity = new Vector2 ();
 		GetComponent<Animator> ().SetTrigger ( "explode" );
 		if ( otherPlayer != null )
+		{
+			transform.position = otherPlayer.transform.position;
 			OnDoDamaged ( otherPlayer );
+		}
 		yield return new WaitForSeconds ( 1f );
 		if ( particleStartOnExplode != null )
 		{
@@ -79,20 +83,20 @@ public class Projectile : MonoBehaviour
 
 	void OnDoDamaged ( Player otherPlayer )
 	{
-        if (MyAction.Name == "Fireball")
-        {
-            SoundManager.Instance.PlayFireBallExplodeSound();
-        }
-        else if (MyAction.Name == "Super Fireball")
-        {
-            SoundManager.Instance.PlayFireBall2ExplodeSound();
-        }
-        else if (MyAction.Name == "Hyper Fireball")
-        {
-            SoundManager.Instance.PlayFireBall3ExplodeSound();
-        }
+		if ( MyAction.Name == "Fireball" )
+		{
+			SoundManager.Instance.PlayFireBallExplodeSound ();
+		}
+		else if ( MyAction.Name == "Super Fireball" )
+		{
+			SoundManager.Instance.PlayFireBall2ExplodeSound ();
+		}
+		else if ( MyAction.Name == "Hyper Fireball" )
+		{
+			SoundManager.Instance.PlayFireBall3ExplodeSound ();
+		}
 
-        otherPlayer.ChangeHP( MyAction.BaseDamage);
+		otherPlayer.ChangeHP ( (int)(MyAction.BaseDamage * ownerPlayer.DamageModifier) );
 		if ( otherPlayer.Knockbackable && MyAction.KnockbackStrength > 0 )
 		{
 			var dir = transform.position - otherPlayer.transform.position;

@@ -11,7 +11,7 @@ GameObject:
   - 198: {fileID: 19842590}
   - 199: {fileID: 19906688}
   - 114: {fileID: 11429032}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: Particle System
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -32,7 +32,7 @@ GameObject:
   - 58: {fileID: 5883454}
   - 95: {fileID: 9507724}
   - 114: {fileID: 11413966}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: Fireball lvl 3
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -50,7 +50,7 @@ GameObject:
   - 198: {fileID: 19854796}
   - 199: {fileID: 19947754}
   - 114: {fileID: 11444250}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: Particle System
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -203,6 +203,9 @@ MonoBehaviour:
     DamageModifier: 1
     BaseDamage: 0
     KnockbackStrength: 0
+    Cooldown: 1
+    Duration: 0
+    CheckOrbSequence: 1
     OrbNeeded: 
     EffectPrefab: {fileID: 0}
   speedModifier: 1.5
@@ -3228,6 +3231,10 @@ Prefab:
     - target: {fileID: 0}
       propertyPath: speedModifier
       value: 1.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: m_Layer
+      value: 12
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 0}

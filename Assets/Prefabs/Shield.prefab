@@ -10,7 +10,7 @@ GameObject:
   - 4: {fileID: 443792}
   - 212: {fileID: 21248096}
   - 61: {fileID: 6162896}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: Shield
   m_TagString: Shield
   m_Icon: {fileID: 0}
@@ -116,6 +116,10 @@ Prefab:
     - target: {fileID: 0}
       propertyPath: m_Size.y
       value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: m_Layer
+      value: 11
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 0}

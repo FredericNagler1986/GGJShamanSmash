@@ -24,6 +24,8 @@ public class Player : MonoBehaviour
 
 	public bool Shield = false;
 	public bool Knockbackable = true;
+	public float SpeedModifier = 1f;
+	public float DamageModifier = 1f;
 	public int HP;
 
 	private float jumpCooldown;
@@ -97,7 +99,7 @@ public class Player : MonoBehaviour
 
 		if ( x != 0 && blockMoveInput )
 		{
-			velo.x = x * Content.Player.MoveSpeed;
+			velo.x = x * Content.Player.MoveSpeed * SpeedModifier;
 		}
 
 		var isGround = Mathf.Abs ( velo.y ) < 0.1f;
@@ -127,7 +129,7 @@ public class Player : MonoBehaviour
         bool isGrounded = groundedHandler.Grounded;// myRigid.IsTouchingLayers ( GroundLayer.value );
 		var jump = Input.GetButtonDown ( inputPrefix + "A" );
 		if ( (((jump || y > 0.6f) && isGrounded) || (jump && jumpCount < 2))
-			&& blockMoveInput 
+			&& blockMoveInput
 			&& (Time.time > jumpCooldown || jumpCount < 2) )
 		{
 			jumpCooldown = Time.time + 0.5f;
@@ -153,11 +155,22 @@ public class Player : MonoBehaviour
 		UpdateOrbs ();
 	}
 
+	static void ChangeLayersRecursively ( Transform trans, string name )
+	{
+		foreach ( Transform child in trans )
+		{
+			child.gameObject.layer = LayerMask.NameToLayer ( name );
+			ChangeLayersRecursively ( child, name );
+		}
+	}
+
 	public void Die ()
 	{
 		SoundManager.Instance.PlayDeathSound ();
 
-        var copy = (GameObject)Instantiate(MaskSpriteRenderer.gameObject,MaskSpriteRenderer.transform.position,Quaternion.identity);
+		ChangeLayersRecursively ( transform, "Dead" );
+
+		var copy = (GameObject)Instantiate ( MaskSpriteRenderer.gameObject, MaskSpriteRenderer.transform.position, Quaternion.identity );
 
 		MaskSpriteRenderer.enabled = false;
 

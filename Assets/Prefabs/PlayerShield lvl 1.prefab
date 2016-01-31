@@ -95,6 +95,7 @@ MonoBehaviour:
     KnockbackStrength: 0
     Cooldown: 0
     Duration: 0
+    CheckOrbSequence: 1
     OrbNeeded: 
     EffectPrefab: {fileID: 0}
   AppendOnPlayer: 1
@@ -3092,7 +3093,7 @@ ParticleSystemRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
-  m_SortingOrder: 0
+  m_SortingOrder: 1
   m_RenderMode: 0
   m_SortMode: 0
   m_MinParticleSize: 0
@@ -3114,7 +3115,11 @@ Prefab:
   serializedVersion: 2
   m_Modification:
     m_TransformParent: {fileID: 0}
-    m_Modifications: []
+    m_Modifications:
+    - target: {fileID: 0}
+      propertyPath: m_SortingOrder
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 0}
   m_RootGameObject: {fileID: 180616}
