@@ -46,6 +46,16 @@ public class SoundManager : SingletonMonoBehaviour<SoundManager>
         source.PlayOneShot(Content.GetRandomSlashSound());
     }
 
+    public void PlaySlash2Sound()
+    {
+        source.PlayOneShot(Content.GetRandomSlash2Sound());
+    }
+
+    public void PlaySlash3Sound()
+    {
+        source.PlayOneShot(Content.GetRandomSlash3Sound());
+    }
+
     public void PlayShieldSound()
     {
         source.PlayOneShot(Content.GetRandomShieldSound());
@@ -56,9 +66,29 @@ public class SoundManager : SingletonMonoBehaviour<SoundManager>
         source.PlayOneShot(Content.GetRandomFireBallThrowSound());
     }
 
+    public void PlayFireBall2ThrowSound()
+    {
+        source.PlayOneShot(Content.GetRandomFireBall2ThrowSound());
+    }
+
+    public void PlayFireBall3ThrowSound()
+    {
+        source.PlayOneShot(Content.GetRandomFireBall3ThrowSound());
+    }
+
     public void PlayFireBallExplodeSound()
     {
         source.PlayOneShot(Content.GetRandomFireBallExplodeSound());
+    }
+
+    public void PlayFireBall2ExplodeSound()
+    {
+        source.PlayOneShot(Content.GetRandomFireBall2ExplodeSound());
+    }
+
+    public void PlayFireBall3ExplodeSound()
+    {
+        source.PlayOneShot(Content.GetRandomFireBall3ExplodeSound());
     }
 
     public void PlayOrbDeniedSound()

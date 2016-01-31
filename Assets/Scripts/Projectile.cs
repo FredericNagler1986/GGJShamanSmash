@@ -23,7 +23,20 @@ public class Projectile : MonoBehaviour
 
 		float normalizedDirection = Direction >= 0 ? 1 : -1;
 		GetComponent<Rigidbody2D> ().velocity = new Vector2 ( normalizedDirection * Content.ProjectileSpeed * speedModifier, 0 );
-	}
+
+        if (MyAction.Name == "Fireball")
+        {
+            SoundManager.Instance.PlayFireBallThrowSound();
+        }
+        else if (MyAction.Name == "Super Fireball")
+        {
+            SoundManager.Instance.PlayFireBall2ThrowSound();
+        }
+        else if (MyAction.Name == "Hyper Fireball")
+        {
+            SoundManager.Instance.PlayFireBall3ThrowSound();
+        }
+    }
 
 	void OnTriggerEnter2D ( Collider2D other )
 	{
@@ -66,7 +79,20 @@ public class Projectile : MonoBehaviour
 
 	void OnDoDamaged ( Player otherPlayer )
 	{
-		otherPlayer.HP -= MyAction.BaseDamage;
+        if (MyAction.Name == "Fireball")
+        {
+            SoundManager.Instance.PlayFireBallExplodeSound();
+        }
+        else if (MyAction.Name == "Super Fireball")
+        {
+            SoundManager.Instance.PlayFireBall2ExplodeSound();
+        }
+        else if (MyAction.Name == "Hyper Fireball")
+        {
+            SoundManager.Instance.PlayFireBall3ExplodeSound();
+        }
+
+        otherPlayer.HP -= MyAction.BaseDamage;
 		if ( otherPlayer.Knockbackable && MyAction.KnockbackStrength > 0 )
 		{
 			var dir = transform.position - otherPlayer.transform.position;

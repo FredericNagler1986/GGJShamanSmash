@@ -19,6 +19,8 @@ public class GameManager : SingletonMonoBehaviour<GameManager>
 
     private List<Player> Players;
 
+    private bool isFinished = false;
+
     public void Start()
     {
         Players = new List<Player>();
@@ -44,12 +46,27 @@ public class GameManager : SingletonMonoBehaviour<GameManager>
         }
     }
 
+    private IEnumerator Finish()
+    {
+        if(Players.Count == 1)
+        {
+            Players[0].Win();
+        }
+
+        yield return new WaitForSeconds(2);
+
+        Main.Instance.MoveToResultScreen();
+    }
+
     private void Update()
     {
+        if (isFinished)
+            return;
+
         if(Players.Count <= 1 && Main.Instance != null)
         {
-            Main.Instance.MoveToResultScreen();
-            Destroy(this);
+            StartCoroutine(Finish());
+            isFinished = true;
             return;
         }
 

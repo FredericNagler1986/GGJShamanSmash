@@ -30,7 +30,8 @@ public class Player : MonoBehaviour
 	private string inputPrefix;
 
 	private float moveInputBlockTime;
-	private float punchCooldown;
+	private float normalPunchCooldown;
+	private float[] cooldowns = new float[(int)AttackType._Count];
 	private OrbCollector collector;
 	private PlayerActionManager actionManager;
 
@@ -123,6 +124,8 @@ public class Player : MonoBehaviour
 
     public void Die()
     {
+        SoundManager.Instance.PlayDeathSound();
+
         var copy = Instantiate(MaskSpriteRenderer.gameObject);
 
         MaskSpriteRenderer.enabled = false;
@@ -140,6 +143,21 @@ public class Player : MonoBehaviour
         animator.ResetTrigger("Summon");
         animator.ResetTrigger("SummonShield");
         animator.SetTrigger("death");
+        Destroy(this);
+        Destroy(GetComponent<Rigidbody2D>());
+    }
+
+    public void Win()
+    {
+        var animator = GetComponent<Animator>();
+        animator.ResetTrigger("Falling");
+        animator.ResetTrigger("Jump");
+        animator.ResetTrigger("Punch");
+        animator.ResetTrigger("Slash");
+        animator.ResetTrigger("Shoot");
+        animator.ResetTrigger("Summon");
+        animator.ResetTrigger("SummonShield");
+        animator.SetTrigger("win");
         Destroy(this);
         Destroy(GetComponent<Rigidbody2D>());
     }
@@ -180,7 +198,6 @@ public class Player : MonoBehaviour
 	void Update ()
 	{
         bool block = Time.time > moveInputBlockTime;
-		bool punchblock = Time.time > punchCooldown;
 		myAnimator.SetBool ( "IsBlock", !block );
 
 		// use orb effect
@@ -194,58 +211,55 @@ public class Player : MonoBehaviour
 				switch ( action.AttackType )
 				{
 					case AttackType.Punch:
-						if ( punchblock )
+						if ( Time.time > cooldowns[(int)AttackType.Punch] )
 						{
 							targetAction = action;
-							collector.ClearCollectedOrbs ();
 							moveInputBlockTime = Time.time + Content.Player.PunchLength;
-							punchCooldown = Time.time + Content.Player.PunchCooldown;
+							cooldowns[(int)AttackType.Punch] = Time.time + targetAction.Cooldown;
 							myRigid.velocity *= 0.5f;
 							myAnimator.SetTrigger ( "Punch" );
 						}
 						break;
 					case AttackType.Slash:
-						if ( punchblock )
+						if ( Time.time > cooldowns[(int)AttackType.Slash] )
 						{
 							targetAction = action;
-							collector.ClearCollectedOrbs ();
 							moveInputBlockTime = Time.time + Content.Player.SlashLength;
-							punchCooldown = Time.time + Content.Player.SlashCooldown;
+							cooldowns[(int)AttackType.Slash] = Time.time + targetAction.Cooldown;
 							myRigid.velocity *= 0.5f;
 							myAnimator.SetTrigger ( "Slash" );
 						}
 						break;
 					case AttackType.Projectile:
-						if ( punchblock )
+						if ( Time.time > cooldowns[(int)AttackType.Projectile] )
 						{
 							targetAction = action;
-							collector.ClearCollectedOrbs ();
 							moveInputBlockTime = Time.time + Content.Player.ProjectileLength;
-							punchCooldown = Time.time + Content.Player.ProjectileCooldown;
+							cooldowns[(int)AttackType.Projectile] = Time.time + targetAction.Cooldown;
 							myRigid.velocity *= 0.5f;
 							myAnimator.SetTrigger ( "Shoot" );
 						}
 						break;
 					case AttackType.Summon:
-						if ( punchblock )
+						if ( Time.time > cooldowns[(int)AttackType.Summon] )
 						{
 							targetAction = action;
-							collector.ClearCollectedOrbs ();
 							moveInputBlockTime = Time.time + Content.Player.SummonLength;
-							punchCooldown = Time.time + Content.Player.SummonCooldown;
+							cooldowns[(int)AttackType.Summon] = Time.time + targetAction.Cooldown;
 							myRigid.velocity *= 0.5f;
 							myAnimator.SetTrigger ( "Summon" );
 						}
 						break;
 					case AttackType.SummonShield:
-						if ( punchblock )
+						if ( Time.time > cooldowns[(int)AttackType.SummonShield] )
 						{
 							targetAction = action;
-							collector.ClearCollectedOrbs ();
 							moveInputBlockTime = Time.time + Content.Player.SummonShieldLength;
-							punchCooldown = Time.time + Content.Player.SummonShieldCooldown;
+							cooldowns[(int)AttackType.SummonShield] = Time.time + targetAction.Cooldown;
 							myRigid.velocity *= 0.5f;
 							myAnimator.SetTrigger ( "SummonShield" );
+
+                            SoundManager.Instance.PlayShieldSound();
 						}
 						break;
 				}
@@ -254,11 +268,11 @@ public class Player : MonoBehaviour
 		}
 
 		// simple punch attack
-		if ( punchblock && Input.GetButtonDown ( inputPrefix + "X" ) )
+		if ( Time.time > normalPunchCooldown && Input.GetButtonDown ( inputPrefix + "X" ) )
 		{
 			targetAction = Content.ActionPunch;
 			moveInputBlockTime = Time.time + Content.Player.PunchLength;
-			punchCooldown = Time.time + Content.Player.PunchCooldown;
+			normalPunchCooldown = Time.time + Content.Player.PunchCooldown;
 			myRigid.velocity *= 0.5f;
 			myAnimator.SetTrigger ( "Punch" );
 		}

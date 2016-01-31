@@ -321,6 +321,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Area: {x: 10.46, y: 6.06}
+  DisableOnMove: []
 --- !u!114 &11496626
 MonoBehaviour:
   m_ObjectHideFlags: 1
