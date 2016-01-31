@@ -23,14 +23,14 @@ public class Player : MonoBehaviour
 	public bool Knockbackable = true;
 	public int HP;
 
-	bool lookleft;
-	bool grounded;
+	private bool lookleft;
+	private bool grounded;
 
-	//private int id;
+	private PlayerAction targetAction;
 	private string inputPrefix;
 
 	private float moveInputBlockTime;
-	private float punchBlockTime;
+	private float punchCooldown;
 	private OrbCollector collector;
 	private PlayerActionManager actionManager;
 
@@ -121,7 +121,7 @@ public class Player : MonoBehaviour
 		UpdateOrbs ();
 	}
 
-	private void UpdateOrbs ()
+	void UpdateOrbs ()
 	{
 		var collectedOrbs = collector.GetCollectedOrbs ();
 
@@ -156,25 +156,54 @@ public class Player : MonoBehaviour
 
 	void Update ()
 	{
-		if ( Input.GetButtonDown ( inputPrefix + "B" ) )
+		bool block = Time.time > moveInputBlockTime;
+		bool punchblock = Time.time > punchCooldown;
+		myAnimator.SetBool ( "IsBlock", !block );
+
+		// use orb effect
+		if ( block && Input.GetButtonDown ( inputPrefix + "B" ) )
 		{
-			bool isCast = actionManager.PlayAction ( this, collector.GetCollectedOrbs () );
-			Debug.Log ( "cast action " + isCast );
-			if ( isCast )
+			var action = actionManager.FindAction ( collector.GetCollectedOrbs () );
+			if ( action != null )
 			{
-				collector.ClearCollectedOrbs ();
+				Debug.Log ( "cast action " + action.Name );
+
+				switch ( action.AttackType )
+				{
+					case AttackType.Punch:
+						collector.ClearCollectedOrbs ();
+						actionManager.ExecuteAction ( this, action, null );
+						break;
+					case AttackType.Slash:
+						if ( punchblock )
+						{
+							targetAction = action;
+							moveInputBlockTime = Time.time + Content.Player.SlashLength;
+							punchCooldown = Time.time + Content.Player.SlashCooldown;
+							myRigid.velocity *= 0.5f;
+							myAnimator.SetTrigger ( "Slash" );
+						}
+						break;
+					case AttackType.Projectile:
+						break;
+				}
+
 			}
 		}
 
-		if ( Time.time > punchBlockTime && Input.GetButtonDown ( inputPrefix + "X" ) )
+		if ( punchblock && Input.GetButtonDown ( inputPrefix + "X" ) )
 		{
 			moveInputBlockTime = Time.time + Content.Player.PunchLength;
-			punchBlockTime = Time.time + Content.Player.PunchCooldown;
+			punchCooldown = Time.time + Content.Player.PunchCooldown;
 			myRigid.velocity *= 0.5f;
 			myAnimator.SetTrigger ( "Punch" );
 		}
 
-		myAnimator.SetBool ( "IsBlock", Time.time < moveInputBlockTime );
+
+		if ( Debug.isDebugBuild && Input.GetKeyUp ( KeyCode.C ) )
+		{
+			collector.ClearCollectedOrbs ();
+		}
 	}
 
 	void OnPunch ()

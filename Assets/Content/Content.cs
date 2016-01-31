@@ -20,13 +20,16 @@ public class Content : ScriptableObject
     [Serializable]
     public class PlayerValues
     {
-        public float MoveSpeed = 100;
-        public float JumpForce = 100;
-		public int StartHP = 100;
-		public float PunchLength = 0.632f;
-		public float PunchCooldown = 1.2f;
-		public float PunchKnockback = 1.2f;
-	}
+			public float MoveSpeed = 100;
+			public float JumpForce = 100;
+			public int StartHP = 100;
+			public float PunchLength = 0.632f;
+			public float PunchCooldown = 1.2f;
+			public float PunchKnockback = 1.2f;
+
+			public float SlashLength = 1.2f;
+			public float SlashCooldown = 1.2f;
+		}
 
     public AudioClip DefaultSound;
     public List<AudioClip> DeathSounds;
@@ -154,7 +157,7 @@ public class Content : ScriptableObject
 
 public enum AttackType
 {
-	Punch, Slash, Projectile
+	None, Punch, Slash, Projectile
 }
 
 [Serializable]
