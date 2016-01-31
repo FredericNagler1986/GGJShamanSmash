@@ -22,8 +22,11 @@ MonoBehaviour:
     PunchLength: 0.632
     PunchCooldown: 1.2
     PunchKnockback: 1.2
+    SlashLength: 0.421
+    SlashCooldown: 0.8
   ActionPunch:
     Name: Action
+    AttackType: 0
     Knockback: 0
     SpeedModifier: 1
     DamageModifier: 1
@@ -33,6 +36,7 @@ MonoBehaviour:
     EffectPrefab: {fileID: 185936, guid: 00f8abd2344a05841b3d5aea499377c8, type: 2}
   ActionSlash:
     Name: Action
+    AttackType: 0
     Knockback: 0
     SpeedModifier: 1
     DamageModifier: 1
@@ -42,6 +46,7 @@ MonoBehaviour:
     EffectPrefab: {fileID: 185936, guid: 00f8abd2344a05841b3d5aea499377c8, type: 2}
   Actions:
   - Name: Fireball
+    AttackType: 0
     Knockback: 0
     SpeedModifier: 1
     DamageModifier: 1
@@ -50,6 +55,7 @@ MonoBehaviour:
     OrbNeeded: 01000000
     EffectPrefab: {fileID: 131952, guid: 8d72e385040413448a64713f6a04ad5f, type: 2}
   - Name: Super Fireball
+    AttackType: 0
     Knockback: 0
     SpeedModifier: 1
     DamageModifier: 1
@@ -58,6 +64,7 @@ MonoBehaviour:
     OrbNeeded: 0100000001000000
     EffectPrefab: {fileID: 131952, guid: 52eb8fe4e15b05048aded88ea40822b9, type: 2}
   - Name: Hyper Fireball
+    AttackType: 0
     Knockback: 0
     SpeedModifier: 1
     DamageModifier: 1
@@ -65,6 +72,60 @@ MonoBehaviour:
     KnockbackStrength: 500
     OrbNeeded: 010000000100000001000000
     EffectPrefab: {fileID: 131952, guid: aa2e527048ac97f45ada2c5dcd40fabe, type: 2}
+  - Name: Slash
+    AttackType: 1
+    Knockback: 0
+    SpeedModifier: 1
+    DamageModifier: 1
+    BaseDamage: 15
+    KnockbackStrength: 500
+    OrbNeeded: 03000000
+    EffectPrefab: {fileID: 185936, guid: 00f8abd2344a05841b3d5aea499377c8, type: 2}
+  - Name: Super Slash
+    AttackType: 1
+    Knockback: 0
+    SpeedModifier: 1
+    DamageModifier: 1
+    BaseDamage: 15
+    KnockbackStrength: 500
+    OrbNeeded: 0300000003000000
+    EffectPrefab: {fileID: 185936, guid: 00f8abd2344a05841b3d5aea499377c8, type: 2}
+  - Name: Hyper Slash
+    AttackType: 1
+    Knockback: 0
+    SpeedModifier: 1
+    DamageModifier: 1
+    BaseDamage: 15
+    KnockbackStrength: 500
+    OrbNeeded: 030000000300000003000000
+    EffectPrefab: {fileID: 185936, guid: 00f8abd2344a05841b3d5aea499377c8, type: 2}
+  - Name: Shield
+    AttackType: 0
+    Knockback: 0
+    SpeedModifier: 1
+    DamageModifier: 1
+    BaseDamage: 15
+    KnockbackStrength: 500
+    OrbNeeded: 030000000300000003000000
+    EffectPrefab: {fileID: 160218, guid: 3b47963f83c376c48b06f86437b7cd01, type: 2}
+  - Name: Super Shield
+    AttackType: 0
+    Knockback: 0
+    SpeedModifier: 1
+    DamageModifier: 1
+    BaseDamage: 15
+    KnockbackStrength: 500
+    OrbNeeded: 030000000300000003000000
+    EffectPrefab: {fileID: 160218, guid: 3b47963f83c376c48b06f86437b7cd01, type: 2}
+  - Name: Hyper Shield
+    AttackType: 0
+    Knockback: 0
+    SpeedModifier: 1
+    DamageModifier: 1
+    BaseDamage: 15
+    KnockbackStrength: 500
+    OrbNeeded: 030000000300000003000000
+    EffectPrefab: {fileID: 160218, guid: 3b47963f83c376c48b06f86437b7cd01, type: 2}
   DefaultSound: {fileID: 8300000, guid: f205de380c9e9c54d88f1d04fddb5423, type: 3}
   DeathSounds:
   - {fileID: 8300000, guid: 5a4859657864de2468fdc7c83b72ec94, type: 3}
