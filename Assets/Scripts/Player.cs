@@ -129,7 +129,7 @@ public class Player : MonoBehaviour
 
 		myRigid.velocity = velo;
 
-		this.healthImage.fillAmount = 1.0f - (float)(Mathf.Min(HP, 0f)) / (float)Content.Player.StartHP;
+		this.healthImage.fillAmount = 1.0f - (float)(Mathf.Max(HP, 0f)) / (float)Content.Player.StartHP;
 
 		UpdateOrbs ();
 	}
