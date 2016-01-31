@@ -12,6 +12,7 @@ public class Main : SingletonMonoBehaviour<Main>
     public GameObject IngameMenu = null;
 
     public Content GameContent;
+    public ResultData ResultData;
 
     void Awake()
     {
