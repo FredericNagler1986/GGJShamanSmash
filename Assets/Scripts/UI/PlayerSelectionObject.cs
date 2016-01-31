@@ -133,7 +133,6 @@ public class PlayerSelectionObject : MonoBehaviour
         }
         else
         {
-            Debug.Log(horizontalRightPressed + " - " + horizontalRightDown);
             if (horizontalLeftDown && !horizontalLeftPressed)
             {
                 PreviousMask();
