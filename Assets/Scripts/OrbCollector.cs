@@ -10,6 +10,26 @@ public class OrbCollector : MonoBehaviour
         CollectedOrbs = new List<OrbType>();
     }
 
+    private void Update()
+    {
+        if (Input.GetKeyDown(KeyCode.T))
+        {
+            ClearCollectedOrbs();
+        }
+        else if (Input.GetKeyDown(KeyCode.Z))
+        {
+            CollectedOrbs.Add(OrbType.Fire);
+        }
+        else if(Input.GetKeyDown(KeyCode.U))
+        {
+            CollectedOrbs.Add(OrbType.Melee);
+        }
+        else if (Input.GetKeyDown(KeyCode.I))
+        {
+            CollectedOrbs.Add(OrbType.Shield);
+        }
+    }
+
     void OnTriggerEnter2D(Collider2D other)
     {
         if (other.tag == "Fire")

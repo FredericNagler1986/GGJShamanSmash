@@ -18,7 +18,7 @@ MonoBehaviour:
   Player:
     MoveSpeed: 5
     JumpForce: 300
-    StartHP: 100
+    StartHP: 5
     PunchLength: 0.632
     PunchCooldown: 1.2
     PunchKnockback: 1.2
