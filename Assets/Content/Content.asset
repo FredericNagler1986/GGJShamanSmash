@@ -11,8 +11,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4e1b426e47fd80d45bdad31add248711, type: 3}
   m_Name: Content
   m_EditorClassIdentifier: 
-  MaxOrbs: 3
-  SpawnTimeOrbs: 5.5
+  MaxOrbs: 5
+  SpawnTimeOrbs: 2
   ProjectileSpeed: 10
   ProjectileLifetime: 1
   Player:

@@ -954,6 +954,11 @@ MonoBehaviour:
   - {fileID: 11469654}
   - {fileID: 11459306}
   - {fileID: 11465070}
+  ColorImage:
+  - {fileID: 11423166}
+  - {fileID: 11487980}
+  - {fileID: 11407900}
+  - {fileID: 11479482}
   Slots1:
   - {fileID: 11445056}
   - {fileID: 11481210}
