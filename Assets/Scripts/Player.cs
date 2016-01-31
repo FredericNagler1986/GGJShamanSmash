@@ -197,7 +197,6 @@ public class Player : MonoBehaviour
 						if ( Time.time > cooldowns[(int)AttackType.Punch] )
 						{
 							targetAction = action;
-							collector.ClearCollectedOrbs ();
 							moveInputBlockTime = Time.time + Content.Player.PunchLength;
 							cooldowns[(int)AttackType.Punch] = Time.time + targetAction.Cooldown;
 							myRigid.velocity *= 0.5f;
@@ -208,7 +207,6 @@ public class Player : MonoBehaviour
 						if ( Time.time > cooldowns[(int)AttackType.Slash] )
 						{
 							targetAction = action;
-							collector.ClearCollectedOrbs ();
 							moveInputBlockTime = Time.time + Content.Player.SlashLength;
 							cooldowns[(int)AttackType.Slash] = Time.time + targetAction.Cooldown;
 							myRigid.velocity *= 0.5f;
@@ -219,7 +217,6 @@ public class Player : MonoBehaviour
 						if ( Time.time > cooldowns[(int)AttackType.Projectile] )
 						{
 							targetAction = action;
-							collector.ClearCollectedOrbs ();
 							moveInputBlockTime = Time.time + Content.Player.ProjectileLength;
 							cooldowns[(int)AttackType.Projectile] = Time.time + targetAction.Cooldown;
 							myRigid.velocity *= 0.5f;
@@ -230,7 +227,6 @@ public class Player : MonoBehaviour
 						if ( Time.time > cooldowns[(int)AttackType.Summon] )
 						{
 							targetAction = action;
-							collector.ClearCollectedOrbs ();
 							moveInputBlockTime = Time.time + Content.Player.SummonLength;
 							cooldowns[(int)AttackType.Summon] = Time.time + targetAction.Cooldown;
 							myRigid.velocity *= 0.5f;
@@ -241,7 +237,6 @@ public class Player : MonoBehaviour
 						if ( Time.time > cooldowns[(int)AttackType.SummonShield] )
 						{
 							targetAction = action;
-							collector.ClearCollectedOrbs ();
 							moveInputBlockTime = Time.time + Content.Player.SummonShieldLength;
 							cooldowns[(int)AttackType.SummonShield] = Time.time + targetAction.Cooldown;
 							myRigid.velocity *= 0.5f;

@@ -30,11 +30,26 @@ public class PlayerActionManager : MonoBehaviour
 
 	public PlayerAction FindAction ( List<OrbType> orbList )
 	{
-		foreach ( PlayerAction action in Content.Actions )
+		foreach ( PlayerAction action in Content.Actions.OrderByDescending ( ( a ) => a.OrbNeeded.Length ) )
 		{
-			bool isOk = action.OrbNeeded.SequenceEqual ( orbList );
-			if ( isOk )
+			bool found = true;
+			for ( int i = 0; i < action.OrbNeeded.Length; i++ )
 			{
+				if ( i >= orbList.Count )
+				{
+					found = false;
+					break;
+				}
+				OrbType item = action.OrbNeeded[i];
+				if ( orbList[i] != item )
+				{
+					found = false;
+					break;
+				}
+			}
+			if ( found )
+			{
+				orbList.RemoveRange ( 0, action.OrbNeeded.Length );
 				return action;
 			}
 		}
