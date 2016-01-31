@@ -24,6 +24,7 @@ public class Player : MonoBehaviour
 	public bool Knockbackable = true;
 	public int HP;
 
+	private float jumpCooldown;
 	private int jumpCount;
 	private bool lookleft;
 	private bool grounded;
@@ -39,10 +40,10 @@ public class Player : MonoBehaviour
 
 	private Image healthImage;
 
-    public int PlayerId;
-    public int MaskId;
+	public int PlayerId;
+	public int MaskId;
 
-    public bool Lookleft
+	public bool Lookleft
 	{
 		get { return lookleft; }
 	}
@@ -50,7 +51,7 @@ public class Player : MonoBehaviour
 	public void Init ( int playerId, int maskId, Image healthImage, Image slot1, Image slot2, Image slot3 )
 	{
 		PlayerId = playerId;
-        MaskId = maskId;
+		MaskId = maskId;
 
 		MaskSpriteRenderer.sprite = Content.GetMaskSprite ( maskId );
 		BodySpriteRenderer.color = Content.GetPlayerColor ( playerId );
@@ -66,7 +67,7 @@ public class Player : MonoBehaviour
 		Slots.Add ( slot3 );
 	}
 
-	public bool ChangeHP(int value)
+	public bool ChangeHP ( int value )
 	{
 		if ( !Shield )
 		{
@@ -123,60 +124,72 @@ public class Player : MonoBehaviour
 
 		bool isGrounded = myRigid.IsTouchingLayers ( GroundLayer.value );
 		var jump = Input.GetButtonDown ( inputPrefix + "A" );
-		if ( (jump || y > 0.6f) && isGrounded && blockMoveInput )
+		if ( (((jump || y > 0.6f) && isGrounded) || (jump && jumpCount < 2))
+			&& blockMoveInput 
+			&& (Time.time > jumpCooldown || jumpCount < 2) )
 		{
+			jumpCooldown = Time.time + 0.5f;
+			jumpCount++;
+			if ( velo.y < 0 )
+			{
+				velo.y = 0;
+			}
 			myRigid.AddForce ( new Vector2 ( 0, Content.Player.JumpForce ) );
 			myAnimator.SetTrigger ( "Jump" );
 			myAnimator.ResetTrigger ( "Falling" );
+		}
+		else if ( isGrounded )
+		{
+			jumpCount = 0;
 		}
 
 
 		myRigid.velocity = velo;
 
-		this.healthImage.fillAmount = 1.0f - (float)(Mathf.Max(HP, 0f)) / (float)Content.Player.StartHP;
+		this.healthImage.fillAmount = 1.0f - (float)(Mathf.Max ( HP, 0f )) / (float)Content.Player.StartHP;
 
 		UpdateOrbs ();
 	}
 
-    public void Die()
-    {
-        SoundManager.Instance.PlayDeathSound();
+	public void Die ()
+	{
+		SoundManager.Instance.PlayDeathSound ();
 
-        var copy = Instantiate(MaskSpriteRenderer.gameObject);
+        var copy = (GameObject)Instantiate(MaskSpriteRenderer.gameObject,MaskSpriteRenderer.transform.position,Quaternion.identity);
 
-        MaskSpriteRenderer.enabled = false;
+		MaskSpriteRenderer.enabled = false;
 
-        copy.AddComponent<BoxCollider2D>();
-        var rigid = copy.AddComponent<Rigidbody2D>();
-        rigid.AddForce(Vector2.up);
+		copy.AddComponent<BoxCollider2D> ();
+		var rigid = copy.AddComponent<Rigidbody2D> ();
+		rigid.AddForce ( Vector2.up );
 
-        var animator = GetComponent<Animator>();
-        animator.ResetTrigger("Falling");
-        animator.ResetTrigger("Jump");
-        animator.ResetTrigger("Punch");
-        animator.ResetTrigger("Slash");
-        animator.ResetTrigger("Shoot");
-        animator.ResetTrigger("Summon");
-        animator.ResetTrigger("SummonShield");
-        animator.SetTrigger("death");
-        Destroy(this);
-        Destroy(GetComponent<Rigidbody2D>());
-    }
+		var animator = GetComponent<Animator> ();
+		animator.ResetTrigger ( "Falling" );
+		animator.ResetTrigger ( "Jump" );
+		animator.ResetTrigger ( "Punch" );
+		animator.ResetTrigger ( "Slash" );
+		animator.ResetTrigger ( "Shoot" );
+		animator.ResetTrigger ( "Summon" );
+		animator.ResetTrigger ( "SummonShield" );
+		animator.SetTrigger ( "death" );
+		Destroy ( this );
+		Destroy ( GetComponent<Rigidbody2D> () );
+	}
 
-    public void Win()
-    {
-        var animator = GetComponent<Animator>();
-        animator.ResetTrigger("Falling");
-        animator.ResetTrigger("Jump");
-        animator.ResetTrigger("Punch");
-        animator.ResetTrigger("Slash");
-        animator.ResetTrigger("Shoot");
-        animator.ResetTrigger("Summon");
-        animator.ResetTrigger("SummonShield");
-        animator.SetTrigger("win");
-        Destroy(this);
-        Destroy(GetComponent<Rigidbody2D>());
-    }
+	public void Win ()
+	{
+		var animator = GetComponent<Animator> ();
+		animator.ResetTrigger ( "Falling" );
+		animator.ResetTrigger ( "Jump" );
+		animator.ResetTrigger ( "Punch" );
+		animator.ResetTrigger ( "Slash" );
+		animator.ResetTrigger ( "Shoot" );
+		animator.ResetTrigger ( "Summon" );
+		animator.ResetTrigger ( "SummonShield" );
+		animator.SetTrigger ( "win" );
+		Destroy ( this );
+		Destroy ( GetComponent<Rigidbody2D> () );
+	}
 
 	void UpdateOrbs ()
 	{
@@ -213,7 +226,7 @@ public class Player : MonoBehaviour
 
 	void Update ()
 	{
-        bool block = Time.time > moveInputBlockTime;
+		bool block = Time.time > moveInputBlockTime;
 		myAnimator.SetBool ( "IsBlock", !block );
 
 		// use orb effect
@@ -275,7 +288,7 @@ public class Player : MonoBehaviour
 							myRigid.velocity *= 0.5f;
 							myAnimator.SetTrigger ( "SummonShield" );
 
-                            SoundManager.Instance.PlayShieldSound();
+							SoundManager.Instance.PlayShieldSound ();
 						}
 						break;
 				}
@@ -320,7 +333,7 @@ public class Player : MonoBehaviour
 
 	void OnProjectile ()
 	{
-		bool isCast = actionManager.ExecuteAction (this, targetAction, null);
+		bool isCast = actionManager.ExecuteAction ( this, targetAction, null );
 		Debug.Log ( "cast Projectile " + isCast );
 		if ( isCast )
 		{

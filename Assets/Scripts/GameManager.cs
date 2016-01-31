@@ -10,6 +10,7 @@ public class GameManager : SingletonMonoBehaviour<GameManager>
     public List<GameObject> PlayerStats;
     public List<Image> MaskSlots;
     public List<Image> HealthSlots;
+    public List<Image> ColorImage;
 
     public List<Image> Slots1;
     public List<Image> Slots2;
@@ -112,6 +113,7 @@ public class GameManager : SingletonMonoBehaviour<GameManager>
     {
         PlayerStats[playerId].SetActive(true);
         MaskSlots[playerId].sprite = Content.GetMaskSprite(maskId);
+        ColorImage[playerId].color = Content.GetPlayerColor(playerId);
 
         var instance = (GameObject)Instantiate(PlayerPrefab, GetSpawnPoint(),Quaternion.identity);
         var player = instance.GetComponent<Player>();
