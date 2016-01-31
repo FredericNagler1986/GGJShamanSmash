@@ -226,6 +226,9 @@ MonoBehaviour:
   - {fileID: 21300000, guid: b8f71a70fe1410f408a2796408c9feb4, type: 3}
   - {fileID: 21300000, guid: d008e4d5c06dde945b05cf4d7587dd9d, type: 3}
   - {fileID: 21300000, guid: 2f955b198a4532e4e935eb985f1ce305, type: 3}
+  - {fileID: 21300000, guid: 7590c267e13ef9b4797850ddca248b7b, type: 3}
+  - {fileID: 21300000, guid: 7e8b60ae1f6c8cc4cbc60006f09f9cb7, type: 3}
+  - {fileID: 21300000, guid: 8946371407f091b469e95884810983d9, type: 3}
   InputPrefixes:
   - 'P1 '
   - 'P2 '
