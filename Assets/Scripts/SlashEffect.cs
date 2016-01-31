@@ -36,8 +36,9 @@ public class SlashEffect : MonoBehaviour
 		targetPlayer = args[2] as Player;
 
 		this.transform.parent = ownerPlayer.SlashHotzone.transform;
-		this.transform.localPosition = new Vector3 () ;
+		this.transform.localPosition = new Vector3 ();
 		this.transform.localRotation = Quaternion.identity;
+		this.transform.localScale = new Vector3 ( 1, 1, 1 );
 
 		OnDoDamaged ( targetPlayer );
 	}
@@ -47,7 +48,7 @@ public class SlashEffect : MonoBehaviour
 		if ( otherPlayer == null )
 			return;
 
-		otherPlayer.HP -= MyAction.BaseDamage;
+		otherPlayer.ChangeHP ( MyAction.BaseDamage );
 		if ( otherPlayer.Knockbackable && MyAction.KnockbackStrength > 0 )
 		{
 			var dir = otherPlayer.transform.position - transform.position;

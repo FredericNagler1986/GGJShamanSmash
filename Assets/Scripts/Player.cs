@@ -20,9 +20,11 @@ public class Player : MonoBehaviour
 
 	public List<Image> Slots;
 
+	public bool Shield = false;
 	public bool Knockbackable = true;
 	public int HP;
 
+	private int jumpCount;
 	private bool lookleft;
 	private bool grounded;
 
@@ -58,6 +60,16 @@ public class Player : MonoBehaviour
 		Slots.Add ( slot1 );
 		Slots.Add ( slot2 );
 		Slots.Add ( slot3 );
+	}
+
+	public bool ChangeHP(int value)
+	{
+		if ( Shield )
+		{
+			HP -= value;
+			return true;
+		}
+		return false;
 	}
 
 	void Start ()
@@ -117,7 +129,7 @@ public class Player : MonoBehaviour
 
 		myRigid.velocity = velo;
 
-		this.healthImage.fillAmount = 1.0f - (float)HP / (float)Content.Player.StartHP;
+		this.healthImage.fillAmount = 1.0f - (float)(Mathf.Min(HP, 0f)) / (float)Content.Player.StartHP;
 
 		UpdateOrbs ();
 	}
