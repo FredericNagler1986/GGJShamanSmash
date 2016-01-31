@@ -17,6 +17,8 @@ public class GameManager : SingletonMonoBehaviour<GameManager>
 
     public Content Content;
 
+    public GameObject UIGameObject;
+
     private List<Player> Players;
 
     private bool isFinished = false;
@@ -54,7 +56,9 @@ public class GameManager : SingletonMonoBehaviour<GameManager>
         {
             player.Win();
         }
-        
+
+        UIGameObject.SetActive(false);
+
         yield return new WaitForSeconds(2);
 
         Main.Instance.ResultData = new ResultData(player.PlayerId, player.MaskId);
