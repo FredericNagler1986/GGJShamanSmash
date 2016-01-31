@@ -3,8 +3,13 @@ using System.Collections;
 
 public class ResultScreen : MonoBehaviour {
 
-	// Use this for initialization
-	void Start () {
+    void OnEnable()
+    {
+        Main.Instance.GameState = EGameState.Result;
+    }
+
+    // Use this for initialization
+    void Start () {
 	
 	}
 	

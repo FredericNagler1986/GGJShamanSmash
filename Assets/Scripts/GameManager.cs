@@ -49,6 +49,7 @@ public class GameManager : SingletonMonoBehaviour<GameManager>
         if(Players.Count <= 1 && Main.Instance != null)
         {
             Main.Instance.MoveToResultScreen();
+            Destroy(this);
             return;
         }
 
