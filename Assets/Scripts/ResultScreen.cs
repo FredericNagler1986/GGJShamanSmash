@@ -13,7 +13,7 @@ public class ResultScreen : MonoBehaviour {
         mResultData = Main.Instance.ResultData;
         if (mResultData == null)
         {
-            mResultData = new ResultData(1, 1);
+            mResultData = new ResultData(1, 7);
         }
         Mask.sprite = Main.Instance.GameContent.Masks[mResultData.PlayerMask];
         PlayerSprite.color = Main.Instance.GameContent.PlayerColors[mResultData.PlayerWon];
